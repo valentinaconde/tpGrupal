@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1715790516 source:c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\articulo.cpp
+	<cstdlib>
+	<cstring>
+	"articulo.h"
+
+1715801524 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\articulo.h
+
+1715790604 source:c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\main.cpp
+	<iostream>
+	<cstdlib>
+	<cstring>
+	"articulo.h"
+
