@@ -58,7 +58,7 @@ public:
   void setEstado(bool s) { estado = s; }
 };
 
-int ultimoCodigoAgregado()
+int ultimoCodigoArticuloAgregado()
 {
   FILE *p;
   p = fopen("producto.dat", "rb");
@@ -78,7 +78,7 @@ int ultimoCodigoAgregado()
 
 void Articulo::Cargar()
 {
-  this->cod = ultimoCodigoAgregado();
+  this->cod = ultimoCodigoArticuloAgregado();
   cout << "CATEGORIA: ";
   cin >> this->categoria;
   cout << "DESCRIPCION: ";

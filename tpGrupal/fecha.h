@@ -2,7 +2,7 @@
 #define FECHA_H
 
 #include <iostream>
-
+using namespace std;
 class Fecha
 {
 private:
@@ -22,16 +22,20 @@ public:
 
 void Fecha::Cargar()
 {
-    std::cin >> dia;
-    std::cin >> mes;
-    std::cin >> anio;
+    cout << "DIA: ";
+    cin >> dia;
+    cout << "MES: ";
+    cin >> mes;
+    cout << "ANIO: ";
+    cin >> anio;
+ 
 }
 
 void Fecha::Mostrar()
 {
-    std::cout << dia << "/";
-    std::cout << mes << "/";
-    std::cout << anio << std::endl;
+    cout << dia << "/";
+    cout << mes << "/";
+    cout << anio << endl;
 }
 
 #endif // FECHA_H

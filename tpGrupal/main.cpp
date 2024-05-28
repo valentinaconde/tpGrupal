@@ -16,6 +16,7 @@ using namespace std;
 int chequearContrasenia()
 {
         char contrasenia[20];
+        cout << endl;
         cout << "INGRESE CONTRASENA: ";
         cin >> contrasenia;
         if (strcmp(contrasenia, "1234") == 0)
@@ -25,6 +26,7 @@ int chequearContrasenia()
         }
         else
         {
+                system("cls");
                 cout << "CONTRASENA INCORRECTA" << endl;
                 return 0;
         }
@@ -49,8 +51,8 @@ bool menuArticulos()
                 cout << "10. MODIFICAR PRECIO GENERAL DE ARTICULOS" << endl;
                 cout << "11. MODIFICAR PRECIO DE ARTICULO EN PARTICULAR" << endl;
                 cout << "12. MODIFICAR STOCK DE ARTICULO" << endl;
-                cout << "0. SALIR" << endl;
-                cout << "SELECCIONE UNA OPCION: " << endl;
+                cout << "0. VOLVER ATRAS" << endl << endl;
+                cout << "SELECCIONE UNA OPCION: ";
                 cin >> opc;
                 switch (opc)
                 {
@@ -114,33 +116,76 @@ bool menuVentas()
 {
 
         int opc;
-        cout << "------------MENU VENTAS------------" << endl;
-        cout << "1. VENDER" << endl;
-        cout << "2. DEVOLUCION" << endl;
-        cout << "3. LISTADO" << endl;
-        cout << "4. SALIR" << endl;
-        cout << "SELECCIONE UNA OPCION: " << endl;
-        cin >> opc;
-        switch (opc)
+        while (true)
         {
-        case 1:
                 system("cls");
-                // altaCliente();
-                break;
-        case 2:
-                // bajaCliente();
-                break;
-        case 3:
-                system("cls");
-                // listadoClientes();
-                break;
-        case 0:
-                return true;
-                break;
-        }
-        system("pause");
+                cout << "------------MENU VENTAS------------" << endl;
+                cout << "1. NUEVA VENTA" << endl;
+                cout << "2. DAR DE BAJA VENTA" << endl;
+                cout << "3. LISTADO DE VENTAS" << endl;
+                cout << "4. LISTADO DE VENTAS POR CLIENTE" << endl;
+                cout << "5. LISTADO DE VENTAS POR FECHA" << endl;
+                cout << "6. LISTADO DE VENTAS POR ARTICULO" << endl;
+                cout << "7. LISTADO DE VENTAS POR METODO DE PAGO" << endl;
+                cout << "8. BUSQUEDA DE VENTA POR DNI DE CLIENTE" << endl;
+                cout << "9. BUSQUEDA DE VENTA POR FECHA" << endl;
+                cout << "10. INFORME DE VENTAS POR MES" << endl;
+                cout << "11. INFORME DE VENTAS POR AÑO" << endl;
+                cout << "0. VOLVER ATRAS" << endl << endl;
+                cout << "SELECCIONE UNA OPCION: ";
+                cin >> opc;
+                switch (opc)
+                {
+                case 1:
+                        system("cls");
+                        altaVenta();
+                        break;
+                case 2:
+                        system("cls");
+                        bajaVenta();
+                        break;
+                case 3:
+                        system("cls");
+                        listadoVentas();
+                        break;
+                case 4:
+                        system("cls");
+                        listadoVentasPorCliente();
+                        break;
+                case 5:
+                        system("cls");
+                        listadoVentasPorFechaMayorAMenor();
+                        break;
+                case 6:
+                        system("cls");
+                        listadoVentasPorArticulo();
+                        break;
+                case 7:
+                        system("cls");
+                        listadoVentasPorMetodoPago();
+                        break;
+                case 8:
+                        system("cls");
+                        buscarVentaPorDniCliente();
+                        break;
+                case 9:
+                        system("cls");
+                        buscarVentaPorFecha();
+                        break;
+                case 10:
+                        system("cls");
+                        informeVentasPorMes();
+                        break;
+                case 11:
+                        system("cls");
+                        informeVentasPorAnio();
+                        break;
 
-        return true;
+                case 0:
+                        return false;
+                        break;
+                }
+        }
 };
 
 bool menuClientes()
@@ -150,8 +195,8 @@ bool menuClientes()
         cout << "1. ALTA CLIENTES" << endl;
         cout << "2. BAJA CLIENTES" << endl;
         cout << "3. LISTADO" << endl;
-        cout << "4. SALIR" << endl;
-        cout << "SELECCIONE UNA OPCION: " << endl;
+        cout << "0. VOLVER ATRAS" << endl << endl;
+        cout << "SELECCIONE UNA OPCION: ";
         cin >> opc;
         switch (opc)
         {
@@ -181,8 +226,8 @@ bool menuFacturas()
         cout << "1. ALTA FACTURAS" << endl;
         cout << "2. BAJA FACTURAS" << endl;
         cout << "3. LISTADO" << endl;
-        cout << "4. SALIR" << endl;
-        cout << "SELECCIONE UNA OPCION: " << endl;
+        cout << "0. VOLVER ATRAS" << endl << endl;
+        cout << "SELECCIONE UNA OPCION: ";
         cin >> opc;
         switch (opc)
         {
@@ -205,14 +250,42 @@ bool menuFacturas()
         return true;
 }
 
-bool menuAdopciones()
+bool menuAdopcionesCliente()
 {
         int opc;
         cout << "------------MENU ADOPCIONES------------" << endl;
         cout << "1. VER LISTADO DE MASCOTAS DISPONIBLES" << endl;
         cout << "2. FORMULARIO DE ADOPCION" << endl;
-        cout << "0. SALIR" << endl;
-        cout << "SELECCIONE UNA OPCION: " << endl;
+        cout << "0. MENU PRINCIPAL" << endl << endl;
+        cout << "SELECCIONE UNA OPCION: ";
+        cin >> opc;
+        switch (opc)
+        {
+        case 1:
+                system("cls");
+                // altaCliente();
+                break;
+        case 2:
+                // bajaCliente();
+                break;
+        case 0:
+                return false;
+                break;
+        }
+        system("pause");
+
+        return false;
+}
+
+bool menuAdopcionesEmpleado()
+{
+        int opc;
+        cout << "------------MENU ADOPCIONES------------" << endl;
+        cout << "1. VER LISTADO DE MASCOTAS DISPONIBLES" << endl;
+        cout << "2. FORMULARIOS DE ADOPCION" << endl;
+        cout << "3. APROBAR ADOPCION" << endl;
+        cout << "0. VOLVER ATRAS" << endl << endl;
+        cout << "SELECCIONE UNA OPCION: ";
         cin >> opc;
         switch (opc)
         {
@@ -234,43 +307,46 @@ bool menuAdopciones()
 
 bool menuEmpleados()
 {
-        int opc;
-        cout << "------------MENU EMPLEADOS------------" << endl;
-        cout << "1. ARTICULOS" << endl;
-        cout << "2. VENTAS" << endl;
-        cout << "3. CLIENTES" << endl;
-        cout << "4. FACTURAS" << endl;
-        cout << "5. ADOPCIONES" << endl;
-        cout << "0. SALIR" << endl;
-        cout << "SELECCIONE UNA OPCION: " << endl;
-        cin >> opc;
-        switch (opc)
+        while (true)
         {
-        case 1:
-                system("cls");
-                return menuArticulos();
-                break;
-        case 2:
-                system("cls");
-                return menuVentas();
-                break;
-        case 3:
-                system("cls");
-                return menuClientes();
-                break;
-        case 4:
-                system("cls");
-                return menuFacturas();
-                break;
-        case 5:
-                system("cls");
-                return menuAdopciones();
-                break;
-        case 0:
-                return false;
-                break;
+
+                int opc;
+                cout << "------------MENU EMPLEADOS------------" << endl;
+                cout << "1. ARTICULOS" << endl;
+                cout << "2. VENTAS" << endl;
+                cout << "3. CLIENTES" << endl;
+                cout << "4. FACTURAS" << endl;
+                cout << "5. ADOPCIONES" << endl;
+                cout << "0. MENU PRINCIPAL" << endl << endl;
+                cout << "SELECCIONE UNA OPCION: ";
+                cin >> opc;
+                switch (opc)
+                {
+                case 1:
+                        system("cls");
+                        menuArticulos();
+                        break;
+                case 2:
+                        system("cls");
+                        menuVentas();
+                        break;
+                case 3:
+                        system("cls");
+                        menuClientes();
+                        break;
+                case 4:
+                        system("cls");
+                        menuFacturas();
+                        break;
+                case 5:
+                        system("cls");
+                        menuAdopcionesCliente();
+                        break;
+                case 0:
+                        return false;
+                        break;
+                }
         }
-        system("pause");
 
         return false;
 }
@@ -296,7 +372,7 @@ int main()
                         break;
                 case 1:
                         system("cls");
-                        shouldContinue = menuAdopciones();
+                        shouldContinue = menuAdopcionesCliente();
                         break;
                 case 2:
                         char rta = 'S';
