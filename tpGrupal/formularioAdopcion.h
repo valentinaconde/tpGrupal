@@ -46,22 +46,23 @@ class FormularioAdopcion {
 };
 
 void FormularioAdopcion::Cargar(){
-    cout<<"ID ADOPTION: ";
+    cout<<"ID ADOPCION: ";
     cin>>this->idAdopcion;
+    cout<<"ID MASCOTA ELEGIDA: ";
+    cin>>this->idMascota;
     cout<<"NOMBRE: ";
-    cin>>this->nombre;
+    cargarCadena(nombre, 30);
     cout<<"APELLIDO: ";
-    cin>>this->apellido;
-    cout<<"CANTIDAD DE MASCOTAS: ";
-    cin>>this->cantidadMascotas;
+    cargarCadena(apellido, 30);
     cout<<"EDAD: ";
     cin>>this->edad;
-    cout<<"ID MASCOTA: ";
-    cin>>this->idMascota;
+    cout<<"CANTIDAD DE MASCOTAS EN CASA: ";
+    cin>>this->cantidadMascotas;
     cout<<"DIRECCION: ";
-    cin>>this->direccion;
-    cout<<"TELEFONO: ";
+    cargarCadena(direccion, 50);
+    cout<<"TELEFONO DE CONTACTO: ";
     cin>>this->telefono;
+    this->estado = true;
 }
 
 void FormularioAdopcion::Mostrar(){
@@ -81,6 +82,8 @@ void FormularioAdopcion::Mostrar(){
     cout<<getDireccion()<<endl;
     cout<<"TELEFONO: ";
     cout<<getTelefono()<<endl;
+    cout << "ESTADO: ";
+    cout << getEstado() << endl;
 }
 
 void FormularioAdopcion::grabarEnDisco(int pos=-1){
@@ -192,6 +195,71 @@ void listadoFormulariosAdopcion(){
     while(reg.leerDeDisco(pos++)==true){
         reg.Mostrar();
         cout<<endl;
+    }
+}
+int ultimoCodigoRegistroAgregado()
+{
+  FILE *p;
+  p = fopen("producto.dat", "rb");
+  if (p == NULL)
+  {
+
+    return 0;
+  }
+
+  RegistroAdopcion reg;
+  fseek(p, -sizeof reg, 2);
+  fread(&reg, sizeof reg, 1, p);
+  cout << "ULTIMO CODIGO DE ARTICULO AGREGADO: " << reg.getIdRegistro() << endl;
+  fclose(p);
+  return reg.getIdRegistro() + 1;
+}
+
+void aprobarRechazarAdopcion(){
+    int id;
+    cout<<"INGRESE EL ID DE ADOPCION A APROBAR O RECHAZAR"<<endl;
+    cin>>id;
+    int pos=buscarIdAdopcion(id);
+    if(pos==-1){
+        cout<<"NO EXISTE EL REGISTRO"<<endl;
+        system("pause");
+        return;
+    }
+
+    FormularioAdopcion obj;
+    obj.leerDeDisco(pos);
+    
+    if(!obj.getEstado()){
+        cout<<"NO EXISTE EL REGISTRO"<<endl;
+        system("pause");
+        return;
+    }
+
+    cout<<"1. APROBAR"<<endl;
+    cout<<"2. RECHAZAR"<<endl;
+    int opc;
+    cin>>opc;
+
+    RegistroAdopcion reg;
+    reg.leerDeDisco(pos);
+
+    Mascota mascota;
+    mascota.leerDeDisco(buscarIdMascota(obj.getIdMascota()));
+
+
+    if(opc==1){
+        reg.setIdRegistro(ultimoCodigoRegistroAgregado());
+        reg.setIdAdopcion(obj.getIdAdopcion());
+        reg.grabarEnDisco();
+        mascota.setEstado(false);
+        mascota.grabarEnDisco(buscarIdMascota(obj.getIdMascota()));
+    }
+    else if(opc==2){
+        obj.setEstado(false);
+        obj.grabarEnDisco(pos);
+    }
+    else{
+        cout<<"OPCION INCORRECTA"<<endl;
     }
 }
 

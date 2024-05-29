@@ -6,12 +6,12 @@ using namespace std;
 
 #include "fecha.h"
 #include "articulo.h"
-#include "factura.h"
-#include "cliente.h"
 #include "venta.h"
-#include "formularioAdopcion.h"
+#include "cliente.h"
+#include "factura.h"
 #include "mascota.h"
 #include "registroAdopciones.h"
+#include "formularioAdopcion.h"
 
 int chequearContrasenia()
 {
@@ -51,7 +51,8 @@ bool menuArticulos()
                 cout << "10. MODIFICAR PRECIO GENERAL DE ARTICULOS" << endl;
                 cout << "11. MODIFICAR PRECIO DE ARTICULO EN PARTICULAR" << endl;
                 cout << "12. MODIFICAR STOCK DE ARTICULO" << endl;
-                cout << "0. VOLVER ATRAS" << endl << endl;
+                cout << "0. VOLVER ATRAS" << endl
+                     << endl;
                 cout << "SELECCIONE UNA OPCION: ";
                 cin >> opc;
                 switch (opc)
@@ -129,9 +130,11 @@ bool menuVentas()
                 cout << "7. LISTADO DE VENTAS POR METODO DE PAGO" << endl;
                 cout << "8. BUSQUEDA DE VENTA POR DNI DE CLIENTE" << endl;
                 cout << "9. BUSQUEDA DE VENTA POR FECHA" << endl;
-                cout << "10. INFORME DE VENTAS POR MES" << endl;
-                cout << "11. INFORME DE VENTAS POR AÑO" << endl;
-                cout << "0. VOLVER ATRAS" << endl << endl;
+                cout << "10. BUSQUEDA DE VENTA POR CODIGO" << endl;
+                cout << "11. INFORME DE VENTAS POR MES" << endl;
+                cout << "12. INFORME DE VENTAS POR AÑO" << endl;
+                cout << "0. VOLVER ATRAS" << endl
+                     << endl;
                 cout << "SELECCIONE UNA OPCION: ";
                 cin >> opc;
                 switch (opc)
@@ -174,9 +177,13 @@ bool menuVentas()
                         break;
                 case 10:
                         system("cls");
-                        informeVentasPorMes();
+                        buscarVentaPorCodigo();
                         break;
                 case 11:
+                        system("cls");
+                        informeVentasPorMes();
+                        break;
+                case 12:
                         system("cls");
                         informeVentasPorAnio();
                         break;
@@ -190,64 +197,133 @@ bool menuVentas()
 
 bool menuClientes()
 {
-        int opc;
-        cout << "------------MENU CLIENTES------------" << endl;
-        cout << "1. ALTA CLIENTES" << endl;
-        cout << "2. BAJA CLIENTES" << endl;
-        cout << "3. LISTADO" << endl;
-        cout << "0. VOLVER ATRAS" << endl << endl;
-        cout << "SELECCIONE UNA OPCION: ";
-        cin >> opc;
-        switch (opc)
+        while (true)
         {
-        case 1:
+                int opc;
                 system("cls");
-                altaCliente();
-                break;
-        case 2:
-                bajaCliente();
-                break;
-        case 3:
-                system("cls");
-                listadoClientes();
-                break;
-        case 0:
-                return true;
-                break;
+                cout << "------------MENU CLIENTES------------" << endl;
+                cout << "1. ALTA CLIENTES" << endl;
+                cout << "2. BAJA CLIENTES" << endl;
+                cout << "3. LISTADO" << endl;
+                cout << "4. LISTADO POR DNI" << endl;
+                cout << "5. LISTADO POR APELLIDO" << endl;
+                cout << "6. LISTADO POR FECHA DE REGISTRO" << endl;
+                cout << "7. MODIFICAR CLIENTE" << endl;
+                cout << "8. BUSQUEDA DE CLIENTE POR DNI" << endl;
+                cout << "9. BUSQUEDA DE CLIENTE POR APELLIDO" << endl;
+                cout << "10. LISTADO DE CLIENTES CON MAS DE 5 COMPRAS" << endl;
+                cout << "0. VOLVER ATRAS" << endl
+                     << endl;
+                cout << "SELECCIONE UNA OPCION: ";
+                cin >> opc;
+                switch (opc)
+                {
+                case 1:
+                        system("cls");
+                        altaCliente();
+                        break;
+                case 2:
+                        system("cls");
+                        bajaCliente();
+                        break;
+                case 3:
+                        system("cls");
+                        listadoClientes();
+                        break;
+                case 4:
+                        system("cls");
+                        listadoClientesOrdenadosPorDni();
+                        break;
+                case 5:
+                        system("cls");
+                        listadoClientesOrdenadosPorApellido();
+                        break;
+                case 6:
+                        system("cls");
+                        listadoClientesOrdenadosPorFechaRegistro();
+                        break;
+                case 7:
+                        system("cls");
+                        modificarCliente();
+                        break;
+                case 8:
+                        system("cls");
+                        buscarClientePorDni();
+                        break;
+                case 9:
+                        system("cls");
+                        buscarClientePorApellido();
+                        break;
+                case 10:
+                        system("cls");
+                        listadoClientesConMasDe5Compras();
+                        break;
+                case 0:
+                        system("cls");
+                        return false;
+                        break;
+                }
         }
-        system("pause");
-        return true;
 }
 
 bool menuFacturas()
 {
-        int opc;
-        cout << "------------MENU FACTURAS------------" << endl;
-        cout << "1. ALTA FACTURAS" << endl;
-        cout << "2. BAJA FACTURAS" << endl;
-        cout << "3. LISTADO" << endl;
-        cout << "0. VOLVER ATRAS" << endl << endl;
-        cout << "SELECCIONE UNA OPCION: ";
-        cin >> opc;
-        switch (opc)
+
+        while (true)
         {
-        case 1:
-                system("cls");
-                altaFactura();
-                break;
-        case 2:
-                bajaFactura();
-                break;
-        case 3:
-                system("cls");
-                listadoFacturas();
-                break;
-        case 0:
-                return true;
-                break;
+                int opc;
+                cout << "------------MENU FACTURAS------------" << endl;
+                cout << "1. ALTA FACTURAS" << endl;
+                cout << "2. BAJA FACTURAS" << endl;
+                cout << "3. LISTADO" << endl;
+                cout << "4. LISTADO POR FECHA" << endl;
+                cout << "5. BUSQUEDA DE FACTURA POR NUMERO" << endl;
+                cout << "6. BUSQUEDA DE FACTURA POR CODIGO DE VENTA" << endl;
+                cout << "7. INFORME TOTAL FACTURADO POR AÑO" << endl;
+                cout << "8. INFORME TOTAL FACTURADO POR CLIENTE" << endl;
+                cout << "0. VOLVER ATRAS" << endl
+                     << endl;
+                cout << "SELECCIONE UNA OPCION: ";
+                cin >> opc;
+                switch (opc)
+                {
+                case 1:
+                        system("cls");
+                        altaFactura();
+                        break;
+                case 2:
+                        bajaFactura();
+                        break;
+                case 3:
+                        system("cls");
+                        listadoFacturas();
+                        break;
+                case 4:
+                        system("cls");
+                        listadoFacturasPorFecha();
+                        break;
+                case 5:
+                        system("cls");
+                        buscarFacturaPorNumero();
+                        break;
+                case 6:
+                        system("cls");
+                        buscarFacturaPorCodigoVenta();
+                        break;
+                case 7:
+                        system("cls");
+                        informeTotalFacturadoPorAnio();
+                        break;
+                case 8:
+                        system("cls");
+                        informeTotalFacturadoPorCliente();
+                        break;
+                case 0:
+                        system("cls");
+                        return false;
+                        break;
+                }
         }
-        system("pause");
-        return true;
 }
 
 bool menuAdopcionesCliente()
@@ -263,10 +339,10 @@ bool menuAdopcionesCliente()
         {
         case 1:
                 system("cls");
-                // altaCliente();
+                listadoMascotas();
                 break;
         case 2:
-                // bajaCliente();
+                altaFormularioAdopcion();
                 break;
         case 0:
                 return false;
@@ -279,37 +355,60 @@ bool menuAdopcionesCliente()
 
 bool menuAdopcionesEmpleado()
 {
-        int opc;
-        cout << "------------MENU ADOPCIONES------------" << endl;
-        cout << "1. VER LISTADO DE MASCOTAS DISPONIBLES" << endl;
-        cout << "2. FORMULARIOS DE ADOPCION" << endl;
-        cout << "3. APROBAR ADOPCION" << endl;
-        cout << "0. VOLVER ATRAS" << endl << endl;
-        cout << "SELECCIONE UNA OPCION: ";
-        cin >> opc;
-        switch (opc)
+        while (true)
         {
-        case 1:
-                system("cls");
-                // altaCliente();
-                break;
-        case 2:
-                // bajaCliente();
-                break;
-        case 0:
-                return false;
-                break;
-        }
-        system("pause");
+                int opc;
+                cout << "------------MENU ADOPCIONES------------" << endl;
+                cout << "1. DAR DE ALTA MASCOTA" << endl;
+                cout << "2. DAR DE BAJA MASCOTA" << endl;
+                cout << "3. VER LISTADO DE MASCOTAS DISPONIBLES" << endl;
+                cout << "4. MODIFICAR MASCOTA" << endl;
+                cout << "5. FORMULARIOS DE ADOPCION" << endl;
+                cout << "6. APROBAR O RECHAZAR ADOPCION" << endl;
+                cout << "0. VOLVER ATRAS" << endl
+                     << endl;
+                cout << "SELECCIONE UNA OPCION: ";
+                cin >> opc;
+                switch (opc)
+                {
+                case 1:
+                        system("cls");
+                        altaMascota();
+                        break;
+                case 2:
+                        system("cls");
+                        bajaMascota();
+                        break;
+                case 3:
+                        system("cls");
+                        listadoMascotas();
+                        break;
+                case 4:
+                        system("cls");
+                        modificarMascota();
+                        break;
+                case 5:
+                        system("cls");
+                        listadoFormulariosAdopcion();
+                        break;
+                case 6:
+                        system("cls");
+                        aprobarRechazarAdopcion();
+                        break;
 
-        return false;
+                case 0:
+                        system("pause");
+                        return false;
+                        break;
+                }
+        }
 }
 
 bool menuEmpleados()
 {
         while (true)
         {
-
+                system("cls");
                 int opc;
                 cout << "------------MENU EMPLEADOS------------" << endl;
                 cout << "1. ARTICULOS" << endl;
@@ -317,7 +416,8 @@ bool menuEmpleados()
                 cout << "3. CLIENTES" << endl;
                 cout << "4. FACTURAS" << endl;
                 cout << "5. ADOPCIONES" << endl;
-                cout << "0. MENU PRINCIPAL" << endl << endl;
+                cout << "0. MENU PRINCIPAL" << endl
+                     << endl;
                 cout << "SELECCIONE UNA OPCION: ";
                 cin >> opc;
                 switch (opc)
@@ -325,10 +425,12 @@ bool menuEmpleados()
                 case 1:
                         system("cls");
                         menuArticulos();
+
                         break;
                 case 2:
                         system("cls");
                         menuVentas();
+
                         break;
                 case 3:
                         system("cls");
@@ -340,7 +442,7 @@ bool menuEmpleados()
                         break;
                 case 5:
                         system("cls");
-                        menuAdopcionesCliente();
+                        menuAdopcionesEmpleado();
                         break;
                 case 0:
                         return false;
