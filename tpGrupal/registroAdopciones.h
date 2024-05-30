@@ -26,9 +26,9 @@ class RegistroAdopcion {
 
 void RegistroAdopcion::Cargar(){
     cout<<"ID REGISTRO: ";
-    cin>>this->idRegistro;
+    cin>>idRegistro;
     cout<<"ID ADOPCION: ";
-    cin>>this->idAdopcion;
+    cin>>idAdopcion;
 }
 
 void RegistroAdopcion::Mostrar(){

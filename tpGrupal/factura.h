@@ -80,10 +80,10 @@ int ultimoCodigoFacturaAgregado()
 
 void Factura::Cargar()
 {
-    this->numeroFactura = ultimoCodigoFacturaAgregado();
+    numeroFactura = ultimoCodigoFacturaAgregado();
     cout << "CODIGO DE VENTA: ";
-    cin >> this->codigoVenta;
-    this->total = calcularTotal(this->codigoVenta);
+    cin >> codigoVenta;
+    total = calcularTotal(codigoVenta);
     estado = true;
 }
 

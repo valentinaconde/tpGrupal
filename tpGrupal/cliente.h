@@ -45,15 +45,15 @@ public:
 void Cliente::Cargar()
 {
     cout << "NOMBRE: ";
-    cargarCadena(this->nombre, 30);
+    cargarCadena(nombre, 30);
     cout << "APELLIDO: ";
-    cargarCadena(this->apellido, 30);
+    cargarCadena(apellido, 30);
     cout << "DNI: ";
-    cin >> this->dni;
+    cin >> dni;
     cout << "DIRECCION: ";
-    cargarCadena(this->direccion, 30);
+    cargarCadena(direccion, 30);
     cout << "CONTACTO: ";
-    cargarCadena(this->contacto, 30);
+    cargarCadena(contacto, 30);
     cout << "FECHA DE REGISTRO: " << endl;
     fechaRegistro.Cargar();
     estado = true;

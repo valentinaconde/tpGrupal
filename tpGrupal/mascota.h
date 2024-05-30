@@ -54,23 +54,23 @@ public:
 void Mascota::Cargar()
 {
     cout << "ID MASCOTA: ";
-    cin >> this->idMascota;
+    cin >> idMascota;
     cout << "NOMBRE: ";
-    cin >> this->nombre;
+    cin >> nombre;
     cout << "ESPECIE: ";
-    cin >> this->especie;
+    cin >> especie;
     cout << "RAZA: ";
-    cin >> this->raza;
+    cin >> raza;
     cout << "EDAD: ";
-    cin >> this->edad;
+    cin >> edad;
     cout << "GENERO: ";
-    cin >> this->genero;
+    cin >> genero;
     cout << "ESTADO: ";
-    cin >> this->estado;
+    cin >> estado;
     cout << "TAMANO: ";
-    cin >> this->tamano;
+    cin >> tamano;
     cout << "COMPORTAMIENTO: ";
-    cin >> this->comportamiento;
+    cin >> comportamiento;
 }
 
 void Mascota::Mostrar()

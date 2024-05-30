@@ -100,19 +100,19 @@ int ultimoCodigoVentaAgregado()
 void Venta::Cargar()
 {
     cout << "CODIGO VENTA: ";
-    cin >> this->codigoVenta;
+    cin >> codigoVenta;
     cout << "DNI CLIENTE: ";
-    cin >> this->dniCliente;
+    cin >> dniCliente;
     cout << "CODIGO ARTICULO: ";
-    cin >> this->codigoArticulo;
+    cin >> codigoArticulo;
     cout << "CANTIDAD: ";
-    cin >> this->cantidad;
-    this->precioTotal = getPrecioFinal(this->codigoArticulo, this->cantidad);
+    cin >> cantidad;
+    precioTotal = getPrecioFinal(codigoArticulo, cantidad);
     cout << "ENVIO A DOMICILIO (1 para SI, 0 para NO): ";
-    cin >> this->envioDomicilio;
+    cin >> envioDomicilio;
     fechaTransaccion.Cargar();
     cout << "METODO DE PAGO: ";
-    cin >> this->metodoPago;
+    cin >> metodoPago;
 }
 
 void Venta::Mostrar()

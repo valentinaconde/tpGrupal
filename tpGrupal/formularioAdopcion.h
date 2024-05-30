@@ -47,22 +47,22 @@ class FormularioAdopcion {
 
 void FormularioAdopcion::Cargar(){
     cout<<"ID ADOPCION: ";
-    cin>>this->idAdopcion;
+    cin>>idAdopcion;
     cout<<"ID MASCOTA ELEGIDA: ";
-    cin>>this->idMascota;
+    cin>>idMascota;
     cout<<"NOMBRE: ";
     cargarCadena(nombre, 30);
     cout<<"APELLIDO: ";
     cargarCadena(apellido, 30);
     cout<<"EDAD: ";
-    cin>>this->edad;
+    cin>>edad;
     cout<<"CANTIDAD DE MASCOTAS EN CASA: ";
-    cin>>this->cantidadMascotas;
+    cin>>cantidadMascotas;
     cout<<"DIRECCION: ";
     cargarCadena(direccion, 50);
     cout<<"TELEFONO DE CONTACTO: ";
-    cin>>this->telefono;
-    this->estado = true;
+    cin>>telefono;
+    estado = true;
 }
 
 void FormularioAdopcion::Mostrar(){

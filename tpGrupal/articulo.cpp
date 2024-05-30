@@ -8,9 +8,9 @@ using namespace std;
 
 void Articulo::Cargar(){
         cout<<"CODIGO: ";
-        cin>>this->cod;
+        cin>>cod;
         cout<<"DESCRIPCION: ";
-        cin>>this->desc;
+        cin>>desc;
         cout<<"PU: ";
         cin>>pu;
         cout<<"STOCK: ";

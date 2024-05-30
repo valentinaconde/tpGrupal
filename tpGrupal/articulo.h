@@ -78,11 +78,11 @@ int ultimoCodigoArticuloAgregado()
 
 void Articulo::Cargar()
 {
-  this->cod = ultimoCodigoArticuloAgregado();
+  cod = ultimoCodigoArticuloAgregado();
   cout << "CATEGORIA: ";
-  cin >> this->categoria;
+  cin >> categoria;
   cout << "DESCRIPCION: ";
-  cargarCadena(this->desc, 30);
+  cargarCadena(desc, 30);
   cout << "PU: ";
   cin >> pu;
   cout << "STOCK: ";
