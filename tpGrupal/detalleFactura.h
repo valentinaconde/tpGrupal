@@ -1,7 +1,7 @@
 #ifndef VENTA_H
 #define VENTA_H
 
-class Venta
+class DetalleFactura
 {
 private:
     int codigoVenta;
@@ -9,6 +9,7 @@ private:
     int codigoArticulo;
     int cantidad;
     float precioTotal;
+    float precioUnitario;
     bool envioDomicilio;
     Fecha fechaTransaccion;
     char metodoPago[30];
@@ -65,7 +66,7 @@ int getPrecioFinal(int codigoArticulo, int cantidad)
 
 int ultimoCodigoVentaAgregado()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     while (reg.leerDeDisco(pos++))
     {
@@ -112,7 +113,7 @@ bool validarStock(int codigoArticulo, int cantidad)
     return false;
 }
 
-void Venta::Cargar()
+void DetalleFactura::Cargar()
 {
     cout << "CODIGO VENTA: ";
     cin >> codigoVenta;
@@ -136,7 +137,9 @@ void Venta::Cargar()
         cin >> cantidad;
         isStock = validarStock(codigoArticulo, cantidad);
     }
+    // TO DO ver esto de precio final y unitario
     precioTotal = getPrecioFinal(codigoArticulo, cantidad);
+    precioUnitario = precioTotal / cantidad;
     cout << "ENVIO A DOMICILIO (1 para SI, 0 para NO): ";
     cin >> envioDomicilio;
     fechaTransaccion.Cargar();
@@ -144,7 +147,7 @@ void Venta::Cargar()
     cin >> metodoPago;
 }
 
-void Venta::Mostrar()
+void DetalleFactura::Mostrar()
 {
     if (estado)
     {
@@ -169,12 +172,12 @@ void Venta::Mostrar()
     }
 }
 
-void Venta::grabarEnDisco(int pos = -1)
+void DetalleFactura::grabarEnDisco(int pos = -1)
 {
     FILE *p;
     if (pos == -1)
     {
-        p = fopen("venta.dat", "ab");
+        p = fopen("detalleFactura.dat", "ab");
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
@@ -184,7 +187,7 @@ void Venta::grabarEnDisco(int pos = -1)
     }
     else
     {
-        p = fopen("venta.dat", "rb+");
+        p = fopen("detalleFactura.dat", "rb+");
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
@@ -197,13 +200,13 @@ void Venta::grabarEnDisco(int pos = -1)
     fclose(p);
 }
 
-bool Venta::leerDeDisco(int pos)
+bool DetalleFactura::leerDeDisco(int pos)
 {
     FILE *p;
-    p = fopen("venta.dat", "rb");
+    p = fopen("detalleFactura.dat", "rb");
     if (p == NULL)
         return false;
-    fseek(p, sizeof(Venta) * pos, 0);
+    fseek(p, sizeof(DetalleFactura) * pos, 0);
     bool x = fread(this, sizeof *this, 1, p);
     fclose(p);
     return x;
@@ -211,7 +214,7 @@ bool Venta::leerDeDisco(int pos)
 
 int buscarCodigoVenta(int cod)
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
 
     while (reg.leerDeDisco(pos))
@@ -226,7 +229,7 @@ int buscarCodigoVenta(int cod)
 }
 void altaVenta()
 {
-    Venta obj;
+    DetalleFactura obj;
     obj.Cargar();
     obj.grabarEnDisco();
     cout << "REGISTRO AGREGADO" << endl;
@@ -259,7 +262,7 @@ void bajaVenta()
         return;
     }
 
-    Venta obj;
+    DetalleFactura obj;
     obj.leerDeDisco(pos);
     if (!obj.getEstado())
     {
@@ -274,7 +277,7 @@ void bajaVenta()
 
 void listadoVentas()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     bool hayVentas = false;
     while (reg.leerDeDisco(pos++) == true)
@@ -295,7 +298,7 @@ void listadoVentas()
 
 void listadoVentasPorFechaMayorAMenor()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int cantRegistros = 0;
     while (reg.leerDeDisco(pos++) == true)
@@ -303,7 +306,7 @@ void listadoVentasPorFechaMayorAMenor()
         cantRegistros++;
     }
 
-    Venta *vec = new Venta[cantRegistros];
+    DetalleFactura *vec = new DetalleFactura[cantRegistros];
     pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
@@ -316,7 +319,7 @@ void listadoVentasPorFechaMayorAMenor()
         {
             if (vec[j].getFechaTransaccion().getAnio() < vec[j + 1].getFechaTransaccion().getAnio())
             {
-                Venta aux = vec[j];
+                DetalleFactura aux = vec[j];
                 vec[j] = vec[j + 1];
                 vec[j + 1] = aux;
             }
@@ -324,7 +327,7 @@ void listadoVentasPorFechaMayorAMenor()
             {
                 if (vec[j].getFechaTransaccion().getMes() < vec[j + 1].getFechaTransaccion().getMes())
                 {
-                    Venta aux = vec[j];
+                    DetalleFactura aux = vec[j];
                     vec[j] = vec[j + 1];
                     vec[j + 1] = aux;
                 }
@@ -332,7 +335,7 @@ void listadoVentasPorFechaMayorAMenor()
                 {
                     if (vec[j].getFechaTransaccion().getDia() < vec[j + 1].getFechaTransaccion().getDia())
                     {
-                        Venta aux = vec[j];
+                        DetalleFactura aux = vec[j];
                         vec[j] = vec[j + 1];
                         vec[j + 1] = aux;
                     }
@@ -361,7 +364,7 @@ void listadoVentasPorFechaMayorAMenor()
 
 void listadoVentasPorCliente()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int cantRegistros = 0;
     while (reg.leerDeDisco(pos++) == true)
@@ -369,7 +372,7 @@ void listadoVentasPorCliente()
         cantRegistros++;
     }
 
-    Venta *vec = new Venta[cantRegistros];
+    DetalleFactura *vec = new DetalleFactura[cantRegistros];
     pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
@@ -382,7 +385,7 @@ void listadoVentasPorCliente()
         {
             if (vec[j].getDniCliente() > vec[j + 1].getDniCliente())
             {
-                Venta aux = vec[j];
+                DetalleFactura aux = vec[j];
                 vec[j] = vec[j + 1];
                 vec[j + 1] = aux;
             }
@@ -409,7 +412,7 @@ void listadoVentasPorCliente()
 
 void listadoVentasPorArticulo()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int cantRegistros = 0;
     while (reg.leerDeDisco(pos++) == true)
@@ -417,7 +420,7 @@ void listadoVentasPorArticulo()
         cantRegistros++;
     }
 
-    Venta *vec = new Venta[cantRegistros];
+    DetalleFactura *vec = new DetalleFactura[cantRegistros];
     pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
@@ -430,7 +433,7 @@ void listadoVentasPorArticulo()
         {
             if (vec[j].getCodigoArticulo() > vec[j + 1].getCodigoArticulo())
             {
-                Venta aux = vec[j];
+                DetalleFactura aux = vec[j];
                 vec[j] = vec[j + 1];
                 vec[j + 1] = aux;
             }
@@ -457,7 +460,7 @@ void listadoVentasPorArticulo()
 
 void listadoVentasPorMetodoPago()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int cantRegistros = 0;
     while (reg.leerDeDisco(pos++) == true)
@@ -465,7 +468,7 @@ void listadoVentasPorMetodoPago()
         cantRegistros++;
     }
 
-    Venta *vec = new Venta[cantRegistros];
+    DetalleFactura *vec = new DetalleFactura[cantRegistros];
     pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
@@ -478,7 +481,7 @@ void listadoVentasPorMetodoPago()
         {
             if (strcmp(vec[j].getMetodoPago(), vec[j + 1].getMetodoPago()) > 0)
             {
-                Venta aux = vec[j];
+                DetalleFactura aux = vec[j];
                 vec[j] = vec[j + 1];
                 vec[j + 1] = aux;
             }
@@ -505,7 +508,7 @@ void listadoVentasPorMetodoPago()
 
 void buscarVentaPorDniCliente()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int dni;
     cout << "INGRESE EL DNI DEL CLIENTE A BUSCAR: ";
@@ -522,7 +525,7 @@ void buscarVentaPorDniCliente()
 
 void buscarVentaPorFecha()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     Fecha f;
     f.Cargar();
@@ -538,7 +541,7 @@ void buscarVentaPorFecha()
 
 void informeVentasPorMes()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int mes;
     int cantVentas = 0;
@@ -559,7 +562,7 @@ void informeVentasPorMes()
 
 void informeVentasPorAnio()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int anio;
     int cantVentas = 0;
@@ -580,7 +583,7 @@ void informeVentasPorAnio()
 
 void buscarVentaPorCodigo()
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     int codigo;
     cout << "INGRESE EL CODIGO DE VENTA A BUSCAR: ";

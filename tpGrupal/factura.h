@@ -33,7 +33,7 @@ public:
 int calcularTotal(int codigoVenta)
 {
     cout << "CODIGO VENTA: " << codigoVenta << endl;
-    Venta reg;
+    DetalleFactura reg;
     float total = 0;
     int pos = 0;
     while (reg.leerDeDisco(pos++))
@@ -68,7 +68,7 @@ void Factura::Cargar()
 
 void getFechaFactura(int codigoVenta)
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     while (reg.leerDeDisco(pos++))
     {
@@ -92,6 +92,19 @@ void Factura::Mostrar()
         getFechaFactura(getCodigoVenta());
         cout << "TOTAL: ";
         cout << getTotal() << endl;
+
+        cout << "---- DETALLE DE FACTURA ----" << endl;
+        DetalleFactura reg;
+        int pos = 0;
+        while (reg.leerDeDisco(pos++))
+        {
+            if (reg.getCodigoVenta() == getCodigoVenta() && reg.getEstado())
+            {
+                reg.Mostrar();
+            }
+        }
+        cout << "----------------------------" << endl;
+        cout << endl;
     }
 }
 
@@ -136,7 +149,7 @@ bool Factura::leerDeDisco(int pos)
 }
 bool chequearExistenciaVenta(int codigoVenta)
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     while (reg.leerDeDisco(pos++))
     {
@@ -265,9 +278,9 @@ void listadoFacturas()
     }
 }
 
-Venta getVentaPorCodigo(int codigoVenta)
+DetalleFactura getVentaPorCodigo(int codigoVenta)
 {
-    Venta reg;
+    DetalleFactura reg;
     int pos = 0;
     while (reg.leerDeDisco(pos++))
     {
@@ -276,7 +289,7 @@ Venta getVentaPorCodigo(int codigoVenta)
             return reg;
         }
     }
-    return Venta();
+    return DetalleFactura();
 }
 
 void listadoFacturasPorFecha()
@@ -300,8 +313,8 @@ void listadoFacturasPorFecha()
     {
         for (int j = 0; j < cantRegistros - 1; j++)
         {
-            Venta aux = getVentaPorCodigo(vec[j].getCodigoVenta());
-            Venta aux2 = getVentaPorCodigo(vec[j + 1].getCodigoVenta());
+            DetalleFactura aux = getVentaPorCodigo(vec[j].getCodigoVenta());
+            DetalleFactura aux2 = getVentaPorCodigo(vec[j + 1].getCodigoVenta());
             if (aux.getFechaTransaccion().getAnio() < aux2.getFechaTransaccion().getAnio())
             {
                 Factura aux = vec[j];
@@ -394,7 +407,7 @@ void informeTotalFacturadoPorAnio()
     float total = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
-        Venta aux = getVentaPorCodigo(reg.getCodigoVenta());
+        DetalleFactura aux = getVentaPorCodigo(reg.getCodigoVenta());
         if (aux.getFechaTransaccion().getAnio() == anio && aux.getEstado())
         {
             total += reg.getTotal();
@@ -427,7 +440,7 @@ void informeTotalFacturadoPorCliente()
     float total = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
-        Venta aux = getVentaPorCodigo(reg.getCodigoVenta());
+        DetalleFactura aux = getVentaPorCodigo(reg.getCodigoVenta());
         if (aux.getDniCliente() == dniCliente && aux.getEstado())
         {
             total += reg.getTotal();

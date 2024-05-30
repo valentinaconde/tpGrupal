@@ -6,12 +6,17 @@ using namespace std;
 
 #include "fecha.h"
 #include "articulo.h"
-#include "venta.h"
+#include "detalleFactura.h"
 #include "cliente.h"
 #include "factura.h"
 #include "mascota.h"
 #include "registroAdopciones.h"
 #include "formularioAdopcion.h"
+#include "detalleCompra.h"
+#include "compra.h"
+#include "persona.h"
+#include "provedor.h"
+#include "categoria.h"
 
 int chequearContrasenia()
 {
@@ -253,8 +258,7 @@ void menuClientes()
                 cout << "8. BUSQUEDA DE CLIENTE POR DNI" << endl;
                 cout << "9. BUSQUEDA DE CLIENTE POR APELLIDO" << endl;
                 cout << "10. LISTADO DE CLIENTES CON MAS DE 5 COMPRAS" << endl;
-                cout << "0. VOLVER ATRAS" << endl
-                     << endl;
+                cout << "0. VOLVER ATRAS" << endl << endl;
                 cout << "SELECCIONE UNA OPCION: ";
                 cin >> opc;
                 switch (opc)

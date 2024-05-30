@@ -82,52 +82,52 @@ bool RegistroAdopcion::leerDeDisco(int pos)
     return x;
 }
 
-// int buscarIdRegistro(int id)
-// {
-//     RegistroAdopcion reg;
-//     int pos = 0;
+int buscarIdRegistro(int id)
+{
+    RegistroAdopcion reg;
+    int pos = 0;
 
-//     while (reg.leerDeDisco(pos))
-//     {
-//         if (id == reg.getIdRegistro() && reg.getEstado())
-//         {
-//             return pos;
-//         }
-//         pos++;
-//     }
-//     return -1;
-// }
+    while (reg.leerDeDisco(pos))
+    {
+        if (id == reg.getIdRegistro() && reg.getEstado())
+        {
+            return pos;
+        }
+        pos++;
+    }
+    return -1;
+}
 
-// void altaRegistroAdopcion()
-// {
-//     RegistroAdopcion obj;
-//     obj.Cargar();
-//     int pos = buscarIdRegistro(obj.getIdRegistro());
-//     if (pos == -1)
-//     {
-//         obj.grabarEnDisco();
-//         cout << "REGISTRO AGREGADO" << endl;
-//     }
-//     else
-//     {
-//         cout << "YA EXISTE EL ID DE REGISTRO" << endl;
-//         cout << "NO SE GRABO EL REGISTRO" << endl;
-//     }
-// }
+void altaRegistroAdopcion()
+{
+    RegistroAdopcion obj;
+    obj.Cargar();
+    int pos = buscarIdRegistro(obj.getIdRegistro());
+    if (pos == -1)
+    {
+        obj.grabarEnDisco();
+        cout << "REGISTRO AGREGADO" << endl;
+    }
+    else
+    {
+        cout << "YA EXISTE EL ID DE REGISTRO" << endl;
+        cout << "NO SE GRABO EL REGISTRO" << endl;
+    }
+}
 
-// void grabarRegistro(RegistroAdopcion reg)
-// {
-//     FILE *p;
-//     p = fopen("registros_adopcion.dat", "ab");
-//     if (p == NULL)
-//     {
-//         cout << "ERROR DE ARCHIVO" << endl;
+void grabarRegistro(RegistroAdopcion reg)
+{
+    FILE *p;
+    p = fopen("registros_adopcion.dat", "ab");
+    if (p == NULL)
+    {
+        cout << "ERROR DE ARCHIVO" << endl;
 
-//         return;
-//     }
-//     fwrite(&reg, sizeof reg, 1, p);
-//     fclose(p);
-// }
+        return;
+    }
+    fwrite(&reg, sizeof reg, 1, p);
+    fclose(p);
+}
 
 void listadoRegistrosAdopcion()
 {

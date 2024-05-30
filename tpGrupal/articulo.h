@@ -101,7 +101,7 @@ void Articulo::grabarEnDisco(int pos = -1)
   FILE *p;
   if (pos == -1)
   {
-    p = fopen("producto.dat", "ab");
+    p = fopen("articulo.dat", "ab");
     if (p == NULL)
     {
       return;
@@ -109,7 +109,7 @@ void Articulo::grabarEnDisco(int pos = -1)
   }
   else
   {
-    p = fopen("producto.dat", "rb+");
+    p = fopen("articulo.dat", "rb+");
     if (p == NULL)
     {
       cout << "ERROR DE ARCHIVO" << endl;
@@ -124,7 +124,7 @@ void Articulo::grabarEnDisco(int pos = -1)
 bool Articulo::leerDeDisco(int pos)
 {
   FILE *p;
-  p = fopen("producto.dat", "rb");
+  p = fopen("articulo.dat", "rb");
   if (p == NULL)
     return false;
   fseek(p, sizeof(Articulo) * pos, 0);
@@ -169,7 +169,7 @@ void altaArticulo()
 void grabarRegistro(Articulo reg)
 {
   FILE *p;
-  p = fopen("producto.dat", "ab");
+  p = fopen("articulo.dat", "ab");
   if (p == NULL)
   {
     cout << "ERROR DE ARCHIVO" << endl;

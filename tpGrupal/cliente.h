@@ -475,7 +475,7 @@ void listadoClientesConMasDe5Compras()
         if (reg.getEstado())
         {
             int cantCompras = 0;
-            Venta aux;
+            DetalleFactura aux;
             int posVenta = 0;
             while (aux.leerDeDisco(posVenta++))
             {
