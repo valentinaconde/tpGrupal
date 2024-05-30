@@ -193,7 +193,7 @@ bool menuVentas()
                         break;
                 }
         }
-};
+}
 
 bool menuClientes()
 {

@@ -1,14 +1,59 @@
 # depslib dependency file v1.0
-1715790516 source:c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\articulo.cpp
+1716840704 source:c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\articulo.cpp
 	<cstdlib>
 	<cstring>
 	"articulo.h"
 
-1715801524 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\articulo.h
-
-1715790604 source:c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\main.cpp
+1716992343 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\articulo.h
 	<iostream>
 	<cstdlib>
 	<cstring>
+
+1717019589 source:c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\main.cpp
+	<iostream>
+	<cstdlib>
+	<cstring>
+	"fecha.h"
 	"articulo.h"
+	"venta.h"
+	"cliente.h"
+	"factura.h"
+	"mascota.h"
+	"registroAdopciones.h"
+	"formularioAdopcion.h"
+
+1716924690 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\fecha.h
+	<iostream>
+
+1716996694 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\venta.h
+	<iostream>
+	<cstring>
+	<cstdio>
+	"fecha.h"
+
+1716997422 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\cliente.h
+	<iostream>
+	<cstring>
+	<cstdio>
+	"fecha.h"
+
+1717019564 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\factura.h
+	<iostream>
+	<cstring>
+	<cstdio>
+
+1717000316 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\mascota.h
+	<iostream>
+	<cstring>
+	<cstdio>
+
+1716842452 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\registroadopciones.h
+	<iostream>
+	<cstring>
+	<cstdio>
+
+1717014245 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\formularioadopcion.h
+	<iostream>
+	<cstring>
+	<cstdio>
 

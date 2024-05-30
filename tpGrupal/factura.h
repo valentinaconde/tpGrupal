@@ -58,7 +58,7 @@ int calcularTotal(int codigoVenta)
     }
     fclose(p);
     return total;
-};
+}
 
 int ultimoCodigoFacturaAgregado()
 {
