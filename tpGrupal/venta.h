@@ -1,14 +1,6 @@
 #ifndef VENTA_H
 #define VENTA_H
 
-#include <iostream>
-#include <cstring>
-#include <cstdio>
-
-using namespace std;
-
-#include "fecha.h"
-
 class Venta
 {
 private:
@@ -59,44 +51,67 @@ public:
 
 int getPrecioFinal(int codigoArticulo, int cantidad)
 {
-    FILE *p;
-    p = fopen("producto.dat", "rb");
-    if (p == NULL)
-    {
-        cout << "NO HAY ARTICULOS CARGADOS" << endl;
-        return 0;
-    }
-
     Articulo reg;
-    while (fread(&reg, sizeof reg, 1, p))
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
     {
         if (reg.getCod() == codigoArticulo && reg.getEstado())
         {
-            fclose(p);
             return reg.getPu() * cantidad;
         }
     }
-    fclose(p);
     return 0;
 }
 
 int ultimoCodigoVentaAgregado()
 {
-    FILE *p;
-    p = fopen("venta.dat", "rb");
-    if (p == NULL)
-    {
-        cout << "NO HAY VENTAS CARGADAS" << endl;
-        return 0;
-    }
-
     Venta reg;
-    fseek(p, -sizeof reg, 2);
-    fread(&reg, sizeof reg, 1, p);
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
+    {
+    }
     cout << "ULTIMO CODIGO DE VENTA AGREGADO: " << reg.getCodigoVenta() << endl;
-    fclose(p);
     return reg.getCodigoVenta() + 1;
 }
+
+bool validarArticulo(int codigoArticulo)
+{
+    Articulo reg;
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
+    {
+        if (reg.getCod() == codigoArticulo && reg.getEstado() && reg.getStock() > 0)
+        {
+            return true;
+        }
+    }
+    cout << "NO EXISTE UN ARTICULO CON ESE CODIGO O NO TIENE STOCK. INGRESE UN NUEVO ";
+    return false;
+}
+
+bool validarStock(int codigoArticulo, int cantidad)
+{
+    Articulo reg;
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
+    {
+        if (reg.getCod() == codigoArticulo && reg.getEstado())
+        {
+            if (reg.getStock() < cantidad)
+            {
+                cout << "NO HAY STOCK SUFICIENTE PARA REALIZAR LA VENTA" << endl;
+                return false;
+            }
+            reg.setStock(reg.getStock() - cantidad);
+            reg.grabarEnDisco(pos - 1);
+            cout << "- stock actualizado -" << endl;
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void Venta::Cargar()
 {
     cout << "CODIGO VENTA: ";
@@ -105,8 +120,22 @@ void Venta::Cargar()
     cin >> dniCliente;
     cout << "CODIGO ARTICULO: ";
     cin >> codigoArticulo;
+    bool isArticulo = validarArticulo(codigoArticulo);
+    while (!isArticulo)
+    {
+        cout << "CODIGO ARTICULO: ";
+        cin >> codigoArticulo;
+        isArticulo = validarArticulo(codigoArticulo);
+    }
     cout << "CANTIDAD: ";
     cin >> cantidad;
+    bool isStock = validarStock(codigoArticulo, cantidad);
+    while (!isStock)
+    {
+        cout << "CANTIDAD: ";
+        cin >> cantidad;
+        isStock = validarStock(codigoArticulo, cantidad);
+    }
     precioTotal = getPrecioFinal(codigoArticulo, cantidad);
     cout << "ENVIO A DOMICILIO (1 para SI, 0 para NO): ";
     cin >> envioDomicilio;
@@ -203,19 +232,19 @@ void altaVenta()
     cout << "REGISTRO AGREGADO" << endl;
 }
 
-void grabarRegistro(Venta reg)
-{
-    FILE *p;
-    p = fopen("venta.dat", "ab");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
+// void grabarRegistro(Venta reg)
+// {
+//     FILE *p;
+//     p = fopen("venta.dat", "ab");
+//     if (p == NULL)
+//     {
+//         cout << "ERROR DE ARCHIVO" << endl;
 
-        return;
-    }
-    fwrite(&reg, sizeof reg, 1, p);
-    fclose(p);
-}
+//         return;
+//     }
+//     fwrite(&reg, sizeof reg, 1, p);
+//     fclose(p);
+// }
 
 void bajaVenta()
 {
@@ -247,10 +276,20 @@ void listadoVentas()
 {
     Venta reg;
     int pos = 0;
+    bool hayVentas = false;
     while (reg.leerDeDisco(pos++) == true)
     {
-        reg.Mostrar();
-        cout << endl;
+        if (reg.getEstado())
+        {
+            hayVentas = true;
+            reg.Mostrar();
+            cout << endl;
+        }
+    }
+
+    if (!hayVentas)
+    {
+        cout << "NO HAY VENTAS" << endl;
     }
 }
 
@@ -302,13 +341,20 @@ void listadoVentasPorFechaMayorAMenor()
         }
     }
 
+    bool hayVentas = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayVentas = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+
+    if (!hayVentas)
+    {
+        cout << "NO HAY VENTAS" << endl;
     }
     delete[] vec;
 }
@@ -343,13 +389,20 @@ void listadoVentasPorCliente()
         }
     }
 
+    bool hayVentas = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayVentas = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+
+    if (!hayVentas)
+    {
+        cout << "NO HAY VENTAS" << endl;
     }
     delete[] vec;
 }
@@ -384,13 +437,20 @@ void listadoVentasPorArticulo()
         }
     }
 
+    bool hayVentas = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayVentas = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+
+    if (!hayVentas)
+    {
+        cout << "NO HAY VENTAS" << endl;
     }
     delete[] vec;
 }
@@ -425,13 +485,20 @@ void listadoVentasPorMetodoPago()
         }
     }
 
+    bool hayVentas = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayVentas = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+
+    if (!hayVentas)
+    {
+        cout << "NO HAY VENTAS" << endl;
     }
     delete[] vec;
 }

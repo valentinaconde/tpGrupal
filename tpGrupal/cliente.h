@@ -1,13 +1,6 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
-#include <iostream>
-#include <cstring>
-#include <cstdio>
-#include "fecha.h"
-
-using namespace std;
-
 class Cliente
 {
 private:
@@ -150,19 +143,19 @@ void altaCliente()
     }
 }
 
-void grabarRegistro(Cliente reg)
-{
-    FILE *p;
-    p = fopen("cliente.dat", "ab");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
+// void grabarRegistro(Cliente reg)
+// {
+//     FILE *p;
+//     p = fopen("cliente.dat", "ab");
+//     if (p == NULL)
+//     {
+//         cout << "ERROR DE ARCHIVO" << endl;
 
-        return;
-    }
-    fwrite(&reg, sizeof reg, 1, p);
-    fclose(p);
-}
+//         return;
+//     }
+//     fwrite(&reg, sizeof reg, 1, p);
+//     fclose(p);
+// }
 
 void bajaCliente()
 {
@@ -194,10 +187,19 @@ void listadoClientes()
 {
     Cliente reg;
     int pos = 0;
+    bool hayClientes = false;
     while (reg.leerDeDisco(pos++) == true)
     {
-        reg.Mostrar();
-        cout << endl;
+        if (reg.getEstado())
+        {
+            hayClientes = true;
+            reg.Mostrar();
+            cout << endl;
+        }
+    }
+    if (!hayClientes)
+    {
+        cout << "NO HAY CLIENTES" << endl;
     }
 }
 
@@ -231,13 +233,19 @@ void listadoClientesOrdenadosPorDni()
         }
     }
 
+    bool hayClientes = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayClientes = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+    if (!hayClientes)
+    {
+        cout << "NO HAY CLIENTES" << endl;
     }
     delete[] vec;
 }
@@ -272,13 +280,19 @@ void listadoClientesOrdenadosPorApellido()
         }
     }
 
+    bool hayClientes = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayClientes = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+    if (!hayClientes)
+    {
+        cout << "NO HAY CLIENTES" << endl;
     }
     delete[] vec;
 }
@@ -331,13 +345,19 @@ void listadoClientesOrdenadosPorFechaRegistro()
         }
     }
 
+    bool hayClientes = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayClientes = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+    if (!hayClientes)
+    {
+        cout << "NO HAY CLIENTES" << endl;
     }
 
     delete[] vec;
@@ -449,35 +469,34 @@ void listadoClientesConMasDe5Compras()
 {
     Cliente reg;
     int pos = 0;
+    bool hayClientes = false;
     while (reg.leerDeDisco(pos++) == true)
     {
         if (reg.getEstado())
         {
             int cantCompras = 0;
-            FILE *p;
-            p = fopen("venta.dat", "rb");
-            if (p == NULL)
-            {
-                cout << "ERROR DE ARCHIVO" << endl;
-
-                return;
-            }
             Venta aux;
-            while (fread(&aux, sizeof aux, 1, p) == 1)
+            int posVenta = 0;
+            while (aux.leerDeDisco(posVenta++))
             {
                 if (aux.getDniCliente() == reg.getDni() && reg.getEstado())
                 {
                     cantCompras++;
                 }
             }
-            fclose(p);
             if (cantCompras > 5)
             {
+                hayClientes = true;
                 reg.Mostrar();
                 cout << "CANTIDAD DE COMPRAS: " << cantCompras << endl;
                 cout << endl;
             }
         }
+    }
+
+    if (!hayClientes)
+    {
+        cout << "NO HAY CLIENTES" << endl;
     }
 }
 

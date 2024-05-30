@@ -1,12 +1,6 @@
 #ifndef FORMULARIOADOPCION_H
 #define FORMULARIOADOPCION_H
 
-#include <iostream>
-#include <cstring>
-#include <cstdio>
-
-using namespace std;
-
 class FormularioAdopcion
 {
 private:
@@ -23,7 +17,7 @@ private:
 public:
     void grabarEnDisco(int);
     bool leerDeDisco(int);
-    void Cargar();
+    int Cargar();
     void Mostrar();
 
     int getIdAdopcion() { return idAdopcion; }
@@ -54,13 +48,52 @@ public:
     void setTelefono(char *t) { strcpy(telefono, t); }
     void setEstado(bool s) { estado = s; }
 };
-
-void FormularioAdopcion::Cargar()
+bool validarIdMascota(int id)
 {
-    cout << "ID ADOPCION: ";
-    cin >> idAdopcion;
-    cout << "ID MASCOTA ELEGIDA: ";
-    cin >> idMascota;
+    Mascota reg;
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
+    {
+        if (id == reg.getIdMascota() && reg.getEstado())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+int ultimoCodigoFormularioAgregado()
+{
+    FormularioAdopcion reg;
+    int pos = 0;
+    while(reg.leerDeDisco(pos++)) {} 
+    cout << "ULTIMO CODIGO DE FORMULARIO AGREGADO: " << reg.getIdAdopcion() << endl;
+    return reg.getIdAdopcion() + 1;
+}
+
+int FormularioAdopcion::Cargar()
+{
+    int id;
+    cout << "ID MASCOTA: ";
+    cin >> id;
+    bool existeMascota = validarIdMascota(id);
+    while (!existeMascota)
+    {
+        cout << "NO EXISTE LA MASCOTA, QUIERE ELEGIR OTRA?: (S/N)" << endl;
+        char opc;
+        cin >> opc;
+        if (opc == 'S' || opc == 's')
+        {
+            cout << "ID MASCOTA: ";
+            cin >> id;
+            existeMascota = validarIdMascota(idMascota);
+        }
+        else{
+            return -1;
+        }
+    }
+    idMascota = id;
+    idAdopcion = ultimoCodigoFormularioAgregado();
     cout << "NOMBRE: ";
     cargarCadena(nombre, 30);
     cout << "APELLIDO: ";
@@ -74,27 +107,29 @@ void FormularioAdopcion::Cargar()
     cout << "TELEFONO DE CONTACTO: ";
     cin >> telefono;
     estado = true;
+    return 0;
 }
 
 void FormularioAdopcion::Mostrar()
 {
-    if(estado){
-    cout << "ID ADOPCION: ";
-    cout << getIdAdopcion() << endl;
-    cout << "NOMBRE: ";
-    cout << getNombre() << endl;
-    cout << "APELLIDO: ";
-    cout << getApellido() << endl;
-    cout << "CANTIDAD DE MASCOTAS: ";
-    cout << getCantidadMascotas() << endl;
-    cout << "EDAD: ";
-    cout << getEdad() << endl;
-    cout << "ID MASCOTA: ";
-    cout << getIdMascota() << endl;
-    cout << "DIRECCION: ";
-    cout << getDireccion() << endl;
-    cout << "TELEFONO: ";
-    cout << getTelefono() << endl;
+    if (estado)
+    {
+        cout << "ID ADOPCION: ";
+        cout << getIdAdopcion() << endl;
+        cout << "NOMBRE: ";
+        cout << getNombre() << endl;
+        cout << "APELLIDO: ";
+        cout << getApellido() << endl;
+        cout << "CANTIDAD DE MASCOTAS: ";
+        cout << getCantidadMascotas() << endl;
+        cout << "EDAD: ";
+        cout << getEdad() << endl;
+        cout << "ID MASCOTA: ";
+        cout << getIdMascota() << endl;
+        cout << "DIRECCION: ";
+        cout << getDireccion() << endl;
+        cout << "TELEFONO: ";
+        cout << getTelefono() << endl;
     }
 }
 
@@ -157,7 +192,10 @@ int buscarIdAdopcion(int id)
 void altaFormularioAdopcion()
 {
     FormularioAdopcion obj;
-    obj.Cargar();
+    int cargo = obj.Cargar();
+    if(cargo == -1){
+        return;
+    }
     int pos = buscarIdAdopcion(obj.getIdAdopcion());
     if (pos == -1)
     {
@@ -171,19 +209,19 @@ void altaFormularioAdopcion()
     }
 }
 
-void grabarRegistro(FormularioAdopcion reg)
-{
-    FILE *p;
-    p = fopen("formularioAdopcion.dat", "ab");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
+// void grabarRegistro(FormularioAdopcion reg)
+// {
+//     FILE *p;
+//     p = fopen("formularioAdopcion.dat", "ab");
+//     if (p == NULL)
+//     {
+//         cout << "ERROR DE ARCHIVO" << endl;
 
-        return;
-    }
-    fwrite(&reg, sizeof reg, 1, p);
-    fclose(p);
-}
+//         return;
+//     }
+//     fwrite(&reg, sizeof reg, 1, p);
+//     fclose(p);
+// }
 
 void bajaFormularioAdopcion()
 {
@@ -215,27 +253,31 @@ void listadoFormulariosAdopcion()
 {
     FormularioAdopcion reg;
     int pos = 0;
+    bool hayFormularios = false;
     while (reg.leerDeDisco(pos++) == true)
     {
-        reg.Mostrar();
-        cout << endl;
+        if (reg.getEstado())
+        {
+            hayFormularios = true;
+            reg.Mostrar();
+            cout << endl;
+        }
+    }
+
+    if (!hayFormularios)
+    {
+        cout << "NO HAY FORMULARIOS DE ADOPCION" << endl;
     }
 }
+
 int ultimoCodigoRegistroAgregado()
 {
-    FILE *p;
-    p = fopen("producto.dat", "rb");
-    if (p == NULL)
-    {
-
-        return 0;
-    }
-
     RegistroAdopcion reg;
-    fseek(p, -sizeof reg, 2);
-    fread(&reg, sizeof reg, 1, p);
-    cout << "ULTIMO CODIGO DE ARTICULO AGREGADO: " << reg.getIdRegistro() << endl;
-    fclose(p);
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
+    {
+    }
+    cout << "ULTIMO CODIGO DE REGISTRO AGREGADO: " << reg.getIdRegistro() << endl;
     return reg.getIdRegistro() + 1;
 }
 

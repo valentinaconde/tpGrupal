@@ -2,10 +2,6 @@
 #ifndef ARTICULO_H
 #define ARTICULO_H
 
-#include <iostream>
-#include <cstdlib>
-#include <cstring>
-
 void cargarCadena(char *palabra, int tamano)
 {
 
@@ -60,21 +56,13 @@ public:
 
 int ultimoCodigoArticuloAgregado()
 {
-  FILE *p;
-  p = fopen("producto.dat", "rb");
-  if (p == NULL)
-  {
-
-    return 0;
-  }
-
-  Articulo reg;
-  fseek(p, -sizeof reg, 2);
-  fread(&reg, sizeof reg, 1, p);
-  cout << "ULTIMO CODIGO DE ARTICULO AGREGADO: " << reg.getCod() << endl;
-  fclose(p);
-  return reg.getCod() + 1;
+    Articulo reg;
+    int pos = 0;
+    while(reg.leerDeDisco(pos++)) {} 
+    cout << "ULTIMO CODIGO DE ARTICULO AGREGADO: " << reg.getCod() << endl;
+    return reg.getCod() + 1;
 }
+
 
 void Articulo::Cargar()
 {
@@ -121,7 +109,6 @@ void Articulo::grabarEnDisco(int pos = -1)
   }
   else
   {
-    cout << "ENTRA 3" << endl;
     p = fopen("producto.dat", "rb+");
     if (p == NULL)
     {
@@ -222,10 +209,18 @@ void listadoArticulos()
 {
   Articulo reg;
   int pos = 0;
+  bool hayArticulos = false;
   while (reg.leerDeDisco(pos++) == true)
   {
-    reg.Mostrar();
-    cout << endl;
+    if(reg.getEstado()){
+      reg.Mostrar();
+      cout << endl;
+      hayArticulos = true;
+    }
+  }
+  if (!hayArticulos)
+  {
+    cout << "NO HAY ARTICULOS" << endl;
   }
 }
 
@@ -287,13 +282,20 @@ void listadoArticulosPorPrecio()
     }
   }
 
+  bool hayArticulos = false;
   for (int i = 0; i < cantArticulos; i++)
   {
     if (articulos[i].getEstado())
     {
       articulos[i].Mostrar();
       cout << endl;
+      hayArticulos = true;
     }
+  }
+
+  if (!hayArticulos)
+  {
+    cout << "NO HAY ARTICULOS" << endl;
   }
 }
 

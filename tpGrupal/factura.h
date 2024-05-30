@@ -1,12 +1,6 @@
 #ifndef FACTURA_H
 #define FACTURA_H
 
-#include <iostream>
-#include <cstring>
-#include <cstdio>
-
-using namespace std;
-
 class Factura
 {
 private:
@@ -39,42 +33,27 @@ public:
 int calcularTotal(int codigoVenta)
 {
     cout << "CODIGO VENTA: " << codigoVenta << endl;
-    FILE *p;
-    p = fopen("venta.dat", "rb");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
-
-        return -1;
-    }
     Venta reg;
     float total = 0;
-    while (fread(&reg, sizeof reg, 1, p) == 1)
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
     {
         if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
             total += reg.getPrecioTotal();
         }
     }
-    fclose(p);
     return total;
 }
 
 int ultimoCodigoFacturaAgregado()
 {
-    FILE *p;
-    p = fopen("factura.dat", "rb");
-    if (p == NULL)
-    {
-
-        return 0;
-    }
-
     Factura reg;
-    fseek(p, -sizeof reg, 2);
-    fread(&reg, sizeof reg, 1, p);
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
+    {
+    }
     cout << "ULTIMO CODIGO DE FACTURA AGREGADO: " << reg.getNumeroFactura() << endl;
-    fclose(p);
     return reg.getNumeroFactura() + 1;
 }
 
@@ -89,38 +68,30 @@ void Factura::Cargar()
 
 void getFechaFactura(int codigoVenta)
 {
-    FILE *p;
-    p = fopen("venta.dat", "rb");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
-
-        return;
-    }
     Venta reg;
-    while (fread(&reg, sizeof reg, 1, p) == 1)
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
     {
         if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
             cout << "FECHA DE FACTURA: ";
             reg.getFechaTransaccion().Mostrar();
-            fclose(p);
             return;
         }
     }
-    fclose(p);
 }
 
 void Factura::Mostrar()
 {
-    if(estado){
-    cout << "NUMERO DE FACTURA: ";
-    cout << getNumeroFactura() << endl;
-    cout << "CODIGO DE VENTA: ";
-    cout << getCodigoVenta() << endl;
-    getFechaFactura(getCodigoVenta());
-    cout << "TOTAL: ";
-    cout << getTotal() << endl;
+    if (estado)
+    {
+        cout << "NUMERO DE FACTURA: ";
+        cout << getNumeroFactura() << endl;
+        cout << "CODIGO DE VENTA: ";
+        cout << getCodigoVenta() << endl;
+        getFechaFactura(getCodigoVenta());
+        cout << "TOTAL: ";
+        cout << getTotal() << endl;
     }
 }
 
@@ -163,27 +134,17 @@ bool Factura::leerDeDisco(int pos)
     fclose(p);
     return x;
 }
-
 bool chequearExistenciaVenta(int codigoVenta)
 {
-    FILE *p;
-    p = fopen("venta.dat", "rb");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
-
-        return false;
-    }
     Venta reg;
-    while (fread(&reg, sizeof reg, 1, p) == 1)
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
     {
         if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
-            fclose(p);
             return true;
         }
     }
-    fclose(p);
     return false;
 }
 
@@ -243,19 +204,19 @@ int buscarNumeroFactura(int num)
     return -1;
 }
 
-void grabarRegistro(Factura reg)
-{
-    FILE *p;
-    p = fopen("factura.dat", "ab");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
+// void grabarRegistro(Factura reg)
+// {
+//     FILE *p;
+//     p = fopen("factura.dat", "ab");
+//     if (p == NULL)
+//     {
+//         cout << "ERROR DE ARCHIVO" << endl;
 
-        return;
-    }
-    fwrite(&reg, sizeof reg, 1, p);
-    fclose(p);
-}
+//         return;
+//     }
+//     fwrite(&reg, sizeof reg, 1, p);
+//     fclose(p);
+// }
 
 void bajaFactura()
 {
@@ -287,33 +248,34 @@ void listadoFacturas()
 {
     Factura reg;
     int pos = 0;
+    bool hayFacturas = false;
     while (reg.leerDeDisco(pos++) == true)
     {
-        reg.Mostrar();
-        cout << endl;
+        if (reg.getEstado())
+        {
+            hayFacturas = true;
+            reg.Mostrar();
+            cout << endl;
+        }
+    }
+
+    if (!hayFacturas)
+    {
+        cout << "NO HAY FACTURAS" << endl;
     }
 }
 
 Venta getVentaPorCodigo(int codigoVenta)
 {
-    FILE *p;
-    p = fopen("venta.dat", "rb");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
-
-        return Venta();
-    }
     Venta reg;
-    while (fread(&reg, sizeof reg, 1, p) == 1)
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
     {
         if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
-            fclose(p);
             return reg;
         }
     }
-    fclose(p);
     return Venta();
 }
 
@@ -367,13 +329,20 @@ void listadoFacturasPorFecha()
         }
     }
 
+    bool hayFacturas = false;
     for (int i = 0; i < cantRegistros; i++)
     {
         if (vec[i].getEstado())
         {
+            hayFacturas = true;
             vec[i].Mostrar();
             cout << endl;
         }
+    }
+
+    if (!hayFacturas)
+    {
+        cout << "NO HAY FACTURAS" << endl;
     }
 
     delete[] vec;
@@ -436,24 +405,15 @@ void informeTotalFacturadoPorAnio()
 
 Cliente buscarCliente(int dni)
 {
-    FILE *p;
-    p = fopen("cliente.dat", "rb");
     Cliente reg;
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
-
-        return Cliente();
-    }
-    while (fread(&reg, sizeof reg, 1, p) == 1)
+    int pos = 0;
+    while (reg.leerDeDisco(pos++))
     {
         if (reg.getDni() == dni && reg.getEstado())
         {
-            fclose(p);
             return reg;
         }
     }
-    fclose(p);
     return Cliente();
 }
 

@@ -1,12 +1,6 @@
 #ifndef MASCOTA_H
 #define MASCOTA_H
 
-#include <iostream>
-#include <cstring>
-#include <cstdio>
-
-using namespace std;
-
 class Mascota
 {
 private:
@@ -51,10 +45,18 @@ public:
     void setComportamiento(char *c) { strcpy(comportamiento, c); }
 };
 
+int ultimoIdMascotaAgregado()
+{
+    Mascota reg;
+    int pos = 0;
+    while(reg.leerDeDisco(pos++)) {} 
+    cout << "ULTIMO CODIGO DE MASCOTA AGREGADO: " << reg.getIdMascota() << endl;
+    return reg.getIdMascota() + 1;
+}
+
 void Mascota::Cargar()
 {
-    cout << "ID MASCOTA: ";
-    cin >> idMascota;
+    idMascota = ultimoIdMascotaAgregado();
     cout << "NOMBRE: ";
     cin >> nombre;
     cout << "ESPECIE: ";
@@ -168,19 +170,19 @@ void altaMascota()
     }
 }
 
-void grabarRegistro(Mascota reg)
-{
-    FILE *p;
-    p = fopen("mascotas.dat", "ab");
-    if (p == NULL)
-    {
-        cout << "ERROR DE ARCHIVO" << endl;
+// void grabarRegistro(Mascota reg)
+// {
+//     FILE *p;
+//     p = fopen("mascotas.dat", "ab");
+//     if (p == NULL)
+//     {
+//         cout << "ERROR DE ARCHIVO" << endl;
 
-        return;
-    }
-    fwrite(&reg, sizeof reg, 1, p);
-    fclose(p);
-}
+//         return;
+//     }
+//     fwrite(&reg, sizeof reg, 1, p);
+//     fclose(p);
+// }
 
 void bajaMascota()
 {
@@ -212,11 +214,19 @@ void listadoMascotas()
 {
     Mascota reg;
     int pos = 0;
+    bool hayMascotas = false;
     while (reg.leerDeDisco(pos++) == true)
     {
-        
-        reg.Mostrar();
-        cout << endl;
+        if (reg.getEstado())
+        {
+            hayMascotas = true;
+            reg.Mostrar();
+            cout << endl;
+        }
+    }
+    if (!hayMascotas)
+    {
+        cout << "NO HAY MASCOTAS REGISTRADAS" << endl;
     }
 }
 

@@ -1,8 +1,6 @@
 #ifndef FECHA_H
 #define FECHA_H
 
-#include <iostream>
-using namespace std;
 class Fecha
 {
 private:
@@ -28,7 +26,7 @@ void validarDia(int &dia, int mes)
     {
         if ((dia < 1 || dia > 31) || (mes == 2 && dia > 29) || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30))
         {
-            cout << "Dia invalido, ingrese nuevamente: ";
+            cout << "DIA INVALIDO, INGRESE NUEVAMENTE: ";
             cin >> dia;
         }
         else
@@ -49,7 +47,7 @@ void validarMes(int &mes)
         }
         else
         {
-            cout << "Mes invalido, ingrese nuevamente: ";
+            cout << "MES INVALIDO, INGRESE NUEVAMENTE: ";
             cin >> mes;
         }
     }
@@ -66,7 +64,7 @@ void validarAnio(int &anio)
         }
         else
         {
-            cout << "Anio invalido, ingrese nuevamente: ";
+            cout << "ANIO INVALIDO, INGRESE NUEVAMENTE: ";
             cin >> anio;
         }
     }

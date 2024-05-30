@@ -150,7 +150,7 @@ void menuVentas()
                 cout << "9. BUSQUEDA DE VENTA POR FECHA" << endl;
                 cout << "10. BUSQUEDA DE VENTA POR CODIGO" << endl;
                 cout << "11. INFORME DE VENTAS POR MES" << endl;
-                cout << "12. INFORME DE VENTAS POR AÑO" << endl;
+                cout << "12. INFORME DE VENTAS POR ANIO" << endl;
                 cout << "0. VOLVER ATRAS" << endl
                      << endl;
                 cout << "SELECCIONE UNA OPCION: ";
@@ -340,7 +340,7 @@ void menuFacturas()
                 cout << "4. LISTADO POR FECHA" << endl;
                 cout << "5. BUSQUEDA DE FACTURA POR NUMERO" << endl;
                 cout << "6. BUSQUEDA DE FACTURA POR CODIGO DE VENTA" << endl;
-                cout << "7. INFORME TOTAL FACTURADO POR AÑO" << endl;
+                cout << "7. INFORME TOTAL FACTURADO POR ANIO" << endl;
                 cout << "8. INFORME TOTAL FACTURADO POR CLIENTE" << endl;
                 cout << "0. VOLVER ATRAS" << endl
                      << endl;
@@ -408,6 +408,7 @@ void menuAdopcionesEmpleado()
                 cout << "4. MODIFICAR MASCOTA" << endl;
                 cout << "5. FORMULARIOS DE ADOPCION" << endl;
                 cout << "6. APROBAR O RECHAZAR ADOPCION" << endl;
+                cout << "7. LISTADO REGISTROS DE ADOPCION" << endl;
                 cout << "0. VOLVER ATRAS" << endl
                      << endl;
                 cout << "SELECCIONE UNA OPCION: ";
@@ -442,6 +443,11 @@ void menuAdopcionesEmpleado()
                 case 6:
                         system("cls");
                         aprobarRechazarAdopcion();
+                        system("pause");
+                        break;
+                case 7:
+                        system("cls");
+                        listadoRegistrosAdopcion();
                         system("pause");
                         break;
 
@@ -526,7 +532,6 @@ void menuEmpleados()
                         break;
                 }
         }
-
 }
 
 int main()
