@@ -45,7 +45,7 @@ public:
         if (e > 0)
             edad = e;
     }
-    void setGenero(char g) { genero = g;}
+    void setGenero(char g) { genero = g; }
     void setEstado(bool s) { estado = s; }
     void setTamano(char t) { tamano = t; }
     void setComportamiento(char *c) { strcpy(comportamiento, c); }
@@ -75,6 +75,7 @@ void Mascota::Cargar()
 
 void Mascota::Mostrar()
 {
+    if(estado){
     cout << "ID MASCOTA: ";
     cout << getIdMascota() << endl;
     cout << "NOMBRE: ";
@@ -87,12 +88,11 @@ void Mascota::Mostrar()
     cout << getEdad() << endl;
     cout << "GENERO: ";
     cout << getGenero() << endl;
-    cout << "ESTADO: ";
-    cout << getEstado() << endl;
     cout << "TAMANO: ";
     cout << getTamano() << endl;
     cout << "COMPORTAMIENTO: ";
     cout << getComportamiento() << endl;
+    }
 }
 
 void Mascota::grabarEnDisco(int pos = -1)
@@ -104,7 +104,7 @@ void Mascota::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
     }
@@ -114,7 +114,7 @@ void Mascota::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
         fseek(p, sizeof *this * pos, 0);
@@ -135,12 +135,21 @@ bool Mascota::leerDeDisco(int pos)
     return x;
 }
 
-//////////PROTOTIPOS
-void altaMascota();
-void bajaMascota();
-void listadoMascotas();
-int buscarIdMascota(int);
-void grabarRegistro(Mascota);
+int buscarIdMascota(int id)
+{
+    Mascota reg;
+    int pos = 0;
+
+    while (reg.leerDeDisco(pos))
+    {
+        if (id == reg.getIdMascota() && reg.getEstado())
+        {
+            return pos;
+        }
+        pos++;
+    }
+    return -1;
+}
 
 void altaMascota()
 {
@@ -157,23 +166,6 @@ void altaMascota()
         cout << "YA EXISTE EL ID DE MASCOTA" << endl;
         cout << "NO SE GRABO EL REGISTRO" << endl;
     }
-    system("pause");
-}
-
-int buscarIdMascota(int id)
-{
-    Mascota reg;
-    int pos = 0;
-
-    while (reg.leerDeDisco(pos))
-    {
-        if (id == reg.getIdMascota())
-        {
-            return pos;
-        }
-        pos++;
-    }
-    return -1;
 }
 
 void grabarRegistro(Mascota reg)
@@ -183,7 +175,7 @@ void grabarRegistro(Mascota reg)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return;
     }
     fwrite(&reg, sizeof reg, 1, p);
@@ -199,7 +191,7 @@ void bajaMascota()
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -208,7 +200,7 @@ void bajaMascota()
     if (!obj.getEstado())
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -222,6 +214,7 @@ void listadoMascotas()
     int pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
+        
         reg.Mostrar();
         cout << endl;
     }
@@ -236,7 +229,7 @@ void modificarMascota()
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -245,7 +238,7 @@ void modificarMascota()
     if (!obj.getEstado())
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
     obj.Mostrar();
@@ -300,13 +293,12 @@ void modificarMascota()
         break;
     default:
         cout << "OPCION INCORRECTA" << endl;
-        system("pause");
+
         return;
     }
 
     obj.grabarEnDisco(pos);
     cout << "REGISTRO MODIFICADO" << endl;
-    system("pause");
 }
 
 #endif

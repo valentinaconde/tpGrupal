@@ -92,19 +92,19 @@ void Articulo::Cargar()
 
 void Articulo::Mostrar()
 {
-
-  cout << "CODIGO: ";
-  cout << cod << endl;
-  cout << "CATEGORIA: ";
-  cout << categoria << endl;
-  cout << "DESCRIPCION: ";
-  cout << desc << endl;
-  cout << "PU: ";
-  cout << pu << endl;
-  cout << "STOCK: ";
-  cout << stock << endl;
-  cout << "ESTADO: ";
-  cout << estado << endl;
+  if (estado)
+  {
+    cout << "CODIGO: ";
+    cout << cod << endl;
+    cout << "CATEGORIA: ";
+    cout << categoria << endl;
+    cout << "DESCRIPCION: ";
+    cout << desc << endl;
+    cout << "PU: ";
+    cout << pu << endl;
+    cout << "STOCK: ";
+    cout << stock << endl;
+  }
 }
 
 void Articulo::grabarEnDisco(int pos = -1)
@@ -116,8 +116,6 @@ void Articulo::grabarEnDisco(int pos = -1)
     p = fopen("producto.dat", "ab");
     if (p == NULL)
     {
-      cout << "ENTRA 2" << endl;
-      system("pause");
       return;
     }
   }
@@ -128,7 +126,6 @@ void Articulo::grabarEnDisco(int pos = -1)
     if (p == NULL)
     {
       cout << "ERROR DE ARCHIVO" << endl;
-      system("pause");
       return;
     }
     fseek(p, sizeof *this * pos, 0);
@@ -149,12 +146,21 @@ bool Articulo::leerDeDisco(int pos)
   return x;
 }
 
-//////////PROTOTIPOS
-void altaArticulo();
-void bajaArticulo();
-void listadoArticulos();
-int buscarCodigoArticulo(int);
-void grabarRegistro(Articulo);
+int buscarCodigoArticulo(int cod)
+{
+  Articulo reg;
+  int pos = 0;
+
+  while (reg.leerDeDisco(pos))
+  {
+    if (cod == reg.getCod() && reg.getEstado())
+    {
+      return pos;
+    }
+    pos++;
+  }
+  return -1;
+}
 
 void altaArticulo()
 {
@@ -171,23 +177,6 @@ void altaArticulo()
     cout << "YA EXISTE EL CODIGO DE ARTICULOS" << endl;
     cout << "NO SE GRABO EL REGISTRO" << endl;
   }
-  system("pause");
-}
-
-int buscarCodigoArticulo(int cod)
-{
-  Articulo reg;
-  int pos = 0;
-
-  while (reg.leerDeDisco(pos))
-  {
-    if (cod == reg.getCod())
-    {
-      return pos;
-    }
-    pos++;
-  }
-  return -1;
 }
 
 void grabarRegistro(Articulo reg)
@@ -197,7 +186,6 @@ void grabarRegistro(Articulo reg)
   if (p == NULL)
   {
     cout << "ERROR DE ARCHIVO" << endl;
-    system("pause");
     return;
   }
   fwrite(&reg, sizeof reg, 1, p);
@@ -214,7 +202,6 @@ void bajaArticulo()
   if (pos == -1)
   {
     cout << "NO EXISTE EL REGISTRO" << endl;
-    system("pause");
     return;
   }
 
@@ -223,7 +210,6 @@ void bajaArticulo()
   if (!obj.getEstado())
   {
     cout << "NO EXISTE EL REGISTRO" << endl;
-    system("pause");
     return;
   }
 
@@ -258,7 +244,7 @@ void listadoArticulosPorCategoria()
     pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
-      if (reg.getCategoria() == i + 1)
+      if (reg.getCategoria() == i + 1 && reg.getEstado())
       {
         hayArticulos = true;
         reg.Mostrar();
@@ -303,10 +289,12 @@ void listadoArticulosPorPrecio()
 
   for (int i = 0; i < cantArticulos; i++)
   {
-    articulos[i].Mostrar();
-    cout << endl;
+    if (articulos[i].getEstado())
+    {
+      articulos[i].Mostrar();
+      cout << endl;
+    }
   }
-  system("pause");
 }
 
 void mostrarArticuloPorCodigo()
@@ -320,13 +308,11 @@ void mostrarArticuloPorCodigo()
   if (pos == -1)
   {
     cout << "No se encontro el articulo" << endl;
-    system("pause");
     return;
   }
 
   reg.leerDeDisco(pos);
   reg.Mostrar();
-  system("pause");
   return;
 }
 
@@ -341,7 +327,7 @@ void mostrarArticuloPorDescripcion()
   bool encontrado = false;
   while (reg.leerDeDisco(pos++) == true)
   {
-    if (strcmp(reg.getDesc(), desc) == 0)
+    if (strcmp(reg.getDesc(), desc) == 0 && reg.getEstado())
     {
       reg.Mostrar();
       encontrado = true;
@@ -352,7 +338,6 @@ void mostrarArticuloPorDescripcion()
   {
     cout << "No se encontro el articulo" << endl;
   }
-  system("pause");
   return;
 }
 
@@ -372,7 +357,7 @@ void mostrarArticuloPorRangoPreciosYCategoria()
   bool encontrado = false;
   while (reg.leerDeDisco(pos++) == true)
   {
-    if (reg.getPu() >= min && reg.getPu() <= max && reg.getCategoria() == categoria)
+    if (reg.getPu() >= min && reg.getPu() <= max && reg.getCategoria() == categoria && reg.getEstado())
     {
       reg.Mostrar();
       encontrado = true;
@@ -383,7 +368,6 @@ void mostrarArticuloPorRangoPreciosYCategoria()
   {
     cout << "No se encontraron articulos para ese rango de precios y categoria" << endl;
   }
-  system("pause");
   return;
 }
 
@@ -396,7 +380,10 @@ void informeCategoriasMasVendidas()
 
   while (reg.leerDeDisco(pos++) == true)
   {
-    cantidades[reg.getCategoria() - 1]++;
+    if (reg.getEstado())
+    {
+      cantidades[reg.getCategoria() - 1]++;
+    }
   }
 
   for (int i = 0; i < 5; i++)
@@ -405,7 +392,6 @@ void informeCategoriasMasVendidas()
   }
 
   cout << "--------------------------------" << endl;
-  system("pause");
   return;
 }
 
@@ -424,7 +410,6 @@ void modificarPrecioArticulos()
   }
 
   cout << "Precios modificados" << endl;
-  system("pause");
   return;
 }
 
@@ -442,7 +427,6 @@ void modificarPrecioArticuloEnParticular()
   if (pos == -1)
   {
     cout << "No se encontro el articulo" << endl;
-    system("pause");
     return;
   }
 
@@ -450,7 +434,6 @@ void modificarPrecioArticuloEnParticular()
   reg.setPu(nuevoPrecio);
   reg.grabarEnDisco(pos);
   cout << "Precio modificado" << endl;
-  system("pause");
   return;
 }
 
@@ -468,7 +451,6 @@ void modificarStockArticulo()
   if (pos == -1)
   {
     cout << "No se encontro el articulo" << endl;
-    system("pause");
     return;
   }
 
@@ -476,7 +458,6 @@ void modificarStockArticulo()
   reg.setStock(nuevoStock);
   reg.grabarEnDisco(pos);
   cout << "Stock modificado" << endl;
-  system("pause");
   return;
 }
 

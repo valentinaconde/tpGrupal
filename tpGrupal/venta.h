@@ -70,7 +70,7 @@ int getPrecioFinal(int codigoArticulo, int cantidad)
     Articulo reg;
     while (fread(&reg, sizeof reg, 1, p))
     {
-        if (reg.getCod() == codigoArticulo)
+        if (reg.getCod() == codigoArticulo && reg.getEstado())
         {
             fclose(p);
             return reg.getPu() * cantidad;
@@ -117,26 +117,27 @@ void Venta::Cargar()
 
 void Venta::Mostrar()
 {
-    cout << "CODIGO DE VENTA: ";
-    cout << getCodigoVenta() << endl;
-    cout << "DNI CLIENTE: ";
-    cout << getDniCliente() << endl;
-    cout << "CODIGO ARTICULO: ";
-    cout << getCodigoArticulo() << endl;
-    cout << "CANTIDAD: ";
-    cout << getCantidad() << endl;
-    cout << "PRECIO TOTAL: ";
-    cout << getPrecioTotal() << endl;
-    cout << "PRECIO UNITARIO:";
-    cout << getPrecioTotal() / getCantidad() << endl;
-    cout << "ENVIO A DOMICILIO: ";
-    cout << (getEnvioDomicilio() ? "SI" : "NO") << endl;
-    cout << "FECHA DE TRANSACCION: ";
-    fechaTransaccion.Mostrar();
-    cout << "METODO DE PAGO: ";
-    cout << getMetodoPago() << endl;
-    cout << "ESTADO: ";
-    cout << estado << endl;
+    if (estado)
+    {
+        cout << "CODIGO DE VENTA: ";
+        cout << getCodigoVenta() << endl;
+        cout << "DNI CLIENTE: ";
+        cout << getDniCliente() << endl;
+        cout << "CODIGO ARTICULO: ";
+        cout << getCodigoArticulo() << endl;
+        cout << "CANTIDAD: ";
+        cout << getCantidad() << endl;
+        cout << "PRECIO TOTAL: ";
+        cout << getPrecioTotal() << endl;
+        cout << "PRECIO UNITARIO:";
+        cout << getPrecioTotal() / getCantidad() << endl;
+        cout << "ENVIO A DOMICILIO: ";
+        cout << (getEnvioDomicilio() ? "SI" : "NO") << endl;
+        cout << "FECHA DE TRANSACCION: ";
+        fechaTransaccion.Mostrar();
+        cout << "METODO DE PAGO: ";
+        cout << getMetodoPago() << endl;
+    }
 }
 
 void Venta::grabarEnDisco(int pos = -1)
@@ -148,7 +149,7 @@ void Venta::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
     }
@@ -158,7 +159,7 @@ void Venta::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
         fseek(p, sizeof *this * pos, 0);
@@ -179,22 +180,6 @@ bool Venta::leerDeDisco(int pos)
     return x;
 }
 
-//////////PROTOTIPOS
-void altaVenta();
-void bajaVenta();
-void listadoVentas();
-int buscarCodigoVenta(int);
-void grabarRegistro(Venta);
-
-void altaVenta()
-{
-    Venta obj;
-    obj.Cargar();
-    obj.grabarEnDisco();
-    cout << "REGISTRO AGREGADO" << endl;
-    system("pause");
-}
-
 int buscarCodigoVenta(int cod)
 {
     Venta reg;
@@ -202,13 +187,20 @@ int buscarCodigoVenta(int cod)
 
     while (reg.leerDeDisco(pos))
     {
-        if (cod == reg.getCodigoVenta())
+        if (cod == reg.getCodigoVenta() && reg.getEstado())
         {
             return pos;
         }
         pos++;
     }
     return -1;
+}
+void altaVenta()
+{
+    Venta obj;
+    obj.Cargar();
+    obj.grabarEnDisco();
+    cout << "REGISTRO AGREGADO" << endl;
 }
 
 void grabarRegistro(Venta reg)
@@ -218,7 +210,7 @@ void grabarRegistro(Venta reg)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return;
     }
     fwrite(&reg, sizeof reg, 1, p);
@@ -234,7 +226,7 @@ void bajaVenta()
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -243,7 +235,7 @@ void bajaVenta()
     if (!obj.getEstado())
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -260,7 +252,6 @@ void listadoVentas()
         reg.Mostrar();
         cout << endl;
     }
-    system("pause");
 }
 
 void listadoVentasPorFechaMayorAMenor()
@@ -313,11 +304,13 @@ void listadoVentasPorFechaMayorAMenor()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
     delete[] vec;
-    system("pause");
 }
 
 void listadoVentasPorCliente()
@@ -352,11 +345,13 @@ void listadoVentasPorCliente()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
     delete[] vec;
-    system("pause");
 }
 
 void listadoVentasPorArticulo()
@@ -391,11 +386,13 @@ void listadoVentasPorArticulo()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
     delete[] vec;
-    system("pause");
 }
 
 void listadoVentasPorMetodoPago()
@@ -430,11 +427,13 @@ void listadoVentasPorMetodoPago()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
     delete[] vec;
-    system("pause");
 }
 
 void buscarVentaPorDniCliente()
@@ -446,13 +445,12 @@ void buscarVentaPorDniCliente()
     cin >> dni;
     while (reg.leerDeDisco(pos++) == true)
     {
-        if (reg.getDniCliente() == dni)
+        if (reg.getDniCliente() == dni && reg.getEstado())
         {
             reg.Mostrar();
             cout << endl;
         }
     }
-    system("pause");
 }
 
 void buscarVentaPorFecha()
@@ -463,13 +461,12 @@ void buscarVentaPorFecha()
     f.Cargar();
     while (reg.leerDeDisco(pos++) == true)
     {
-        if (reg.getFechaTransaccion().getAnio() == f.getAnio() && reg.getFechaTransaccion().getMes() == f.getMes() && reg.getFechaTransaccion().getDia() == f.getDia())
+        if (reg.getFechaTransaccion().getAnio() == f.getAnio() && reg.getFechaTransaccion().getMes() == f.getMes() && reg.getFechaTransaccion().getDia() == f.getDia() && reg.getEstado())
         {
             reg.Mostrar();
             cout << endl;
         }
     }
-    system("pause");
 }
 
 void informeVentasPorMes()
@@ -483,7 +480,7 @@ void informeVentasPorMes()
     float total = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
-        if (reg.getFechaTransaccion().getMes() == mes)
+        if (reg.getFechaTransaccion().getMes() == mes && reg.getEstado())
         {
             total += reg.getPrecioTotal();
             cantVentas++;
@@ -491,7 +488,6 @@ void informeVentasPorMes()
     }
     cout << "TOTAL VENTAS EN EL MES " << mes << ": " << cantVentas << endl;
     cout << "PRECIO FINAL TOTAL VENDIDO: $" << total << endl;
-    system("pause");
 }
 
 void informeVentasPorAnio()
@@ -505,7 +501,7 @@ void informeVentasPorAnio()
     float total = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
-        if (reg.getFechaTransaccion().getAnio() == anio)
+        if (reg.getFechaTransaccion().getAnio() == anio && reg.getEstado())
         {
             total += reg.getPrecioTotal();
             cantVentas++;
@@ -513,10 +509,10 @@ void informeVentasPorAnio()
     }
     cout << "TOTAL VENTAS EN EL ANIO " << anio << ": " << cantVentas << endl;
     cout << "PRECIO FINAL TOTAL VENDIDO: $" << total << endl;
-    system("pause");
 }
 
-void buscarVentaPorCodigo(){
+void buscarVentaPorCodigo()
+{
     Venta reg;
     int pos = 0;
     int codigo;
@@ -524,13 +520,12 @@ void buscarVentaPorCodigo(){
     cin >> codigo;
     while (reg.leerDeDisco(pos++) == true)
     {
-        if (reg.getCodigoVenta() == codigo)
+        if (reg.getCodigoVenta() == codigo && reg.getEstado())
         {
             reg.Mostrar();
             cout << endl;
         }
     }
-    system("pause");
 }
 
 #endif

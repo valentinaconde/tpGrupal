@@ -33,11 +33,12 @@ int chequearContrasenia()
         system("pause");
 }
 
-bool menuArticulos()
+void menuArticulos()
 {
         int opc;
         while (true)
         {
+                system("cls");
                 cout << "------------MENU ARTICULOS------------" << endl;
                 cout << "1. ALTA ARTICULOS" << endl;
                 cout << "2. BAJA ARTICULOS" << endl;
@@ -60,60 +61,77 @@ bool menuArticulos()
                 case 1:
                         system("cls");
                         altaArticulo();
+                        system("pause");
                         break;
                 case 2:
                         system("cls");
                         bajaArticulo();
+                        system("pause");
                         break;
                 case 3:
                         system("cls");
                         listadoArticulos();
+                        system("pause");
+
                         break;
                 case 4:
                         system("cls");
                         listadoArticulosPorCategoria();
+                        system("pause");
+
                         break;
                 case 5:
                         system("cls");
                         listadoArticulosPorPrecio();
+                        system("pause");
+
                         break;
                 case 6:
                         system("cls");
                         mostrarArticuloPorCodigo();
+                        system("pause");
+
                         break;
                 case 7:
                         system("cls");
                         mostrarArticuloPorDescripcion();
+                        system("pause");
+
                         break;
                 case 8:
                         system("cls");
                         mostrarArticuloPorRangoPreciosYCategoria();
+                        system("pause");
+
                         break;
                 case 9:
                         system("cls");
                         informeCategoriasMasVendidas();
+                        system("pause");
                         break;
                 case 10:
                         system("cls");
                         modificarPrecioArticulos();
+                        system("pause");
                         break;
                 case 11:
                         system("cls");
                         modificarPrecioArticuloEnParticular();
+                        system("pause");
                         break;
                 case 12:
                         system("cls");
                         modificarStockArticulo();
+                        system("pause");
                         break;
                 case 0:
-                        return true;
+                        return;
                         break;
                 }
-                system("pause");
         }
 }
 
-bool menuVentas()
+void menuVentas()
 {
 
         int opc;
@@ -142,60 +160,83 @@ bool menuVentas()
                 case 1:
                         system("cls");
                         altaVenta();
+                        system("pause");
+
                         break;
                 case 2:
                         system("cls");
                         bajaVenta();
+                        system("pause");
+
                         break;
                 case 3:
                         system("cls");
                         listadoVentas();
+                        system("pause");
+
                         break;
                 case 4:
                         system("cls");
                         listadoVentasPorCliente();
+                        system("pause");
+
                         break;
                 case 5:
                         system("cls");
                         listadoVentasPorFechaMayorAMenor();
+                        system("pause");
+
                         break;
                 case 6:
                         system("cls");
                         listadoVentasPorArticulo();
+                        system("pause");
+
                         break;
                 case 7:
                         system("cls");
                         listadoVentasPorMetodoPago();
+                        system("pause");
+
                         break;
                 case 8:
                         system("cls");
                         buscarVentaPorDniCliente();
+                        system("pause");
+
                         break;
                 case 9:
                         system("cls");
                         buscarVentaPorFecha();
+                        system("pause");
+
                         break;
                 case 10:
                         system("cls");
                         buscarVentaPorCodigo();
+                        system("pause");
+
                         break;
                 case 11:
                         system("cls");
                         informeVentasPorMes();
+                        system("pause");
+
                         break;
                 case 12:
                         system("cls");
                         informeVentasPorAnio();
+                        system("pause");
                         break;
 
                 case 0:
-                        return false;
+                        return;
                         break;
                 }
         }
 }
 
-bool menuClientes()
+void menuClientes()
 {
         while (true)
         {
@@ -221,56 +262,76 @@ bool menuClientes()
                 case 1:
                         system("cls");
                         altaCliente();
+                        system("pause");
+
                         break;
                 case 2:
                         system("cls");
                         bajaCliente();
+                        system("pause");
+
                         break;
                 case 3:
                         system("cls");
                         listadoClientes();
+                        system("pause");
+
                         break;
                 case 4:
                         system("cls");
                         listadoClientesOrdenadosPorDni();
+                        system("pause");
+
                         break;
                 case 5:
                         system("cls");
                         listadoClientesOrdenadosPorApellido();
+                        system("pause");
+
                         break;
                 case 6:
                         system("cls");
                         listadoClientesOrdenadosPorFechaRegistro();
+                        system("pause");
+
                         break;
                 case 7:
                         system("cls");
                         modificarCliente();
+                        system("pause");
+
                         break;
                 case 8:
                         system("cls");
                         buscarClientePorDni();
+                        system("pause");
+
                         break;
                 case 9:
                         system("cls");
                         buscarClientePorApellido();
+                        system("pause");
+
                         break;
                 case 10:
                         system("cls");
                         listadoClientesConMasDe5Compras();
+                        system("pause");
+
                         break;
                 case 0:
-                        system("cls");
-                        return false;
+                        return;
                         break;
                 }
         }
 }
 
-bool menuFacturas()
+void menuFacturas()
 {
 
         while (true)
         {
+                system("cls");
                 int opc;
                 cout << "------------MENU FACTURAS------------" << endl;
                 cout << "1. ALTA FACTURAS" << endl;
@@ -290,74 +351,56 @@ bool menuFacturas()
                 case 1:
                         system("cls");
                         altaFactura();
+                        system("pause");
                         break;
                 case 2:
+                        system("cls");
                         bajaFactura();
+                        system("pause");
                         break;
                 case 3:
                         system("cls");
                         listadoFacturas();
+                        system("pause");
                         break;
                 case 4:
                         system("cls");
                         listadoFacturasPorFecha();
+                        system("pause");
                         break;
                 case 5:
                         system("cls");
                         buscarFacturaPorNumero();
+                        system("pause");
                         break;
                 case 6:
                         system("cls");
                         buscarFacturaPorCodigoVenta();
+                        system("pause");
                         break;
                 case 7:
                         system("cls");
                         informeTotalFacturadoPorAnio();
+                        system("pause");
                         break;
                 case 8:
                         system("cls");
                         informeTotalFacturadoPorCliente();
+                        system("pause");
                         break;
                 case 0:
-                        system("cls");
-                        return false;
+                        return;
                         break;
                 }
         }
 }
 
-bool menuAdopcionesCliente()
-{
-        int opc;
-        cout << "------------MENU ADOPCIONES------------" << endl;
-        cout << "1. VER LISTADO DE MASCOTAS DISPONIBLES" << endl;
-        cout << "2. FORMULARIO DE ADOPCION" << endl;
-        cout << "0. MENU PRINCIPAL" << endl << endl;
-        cout << "SELECCIONE UNA OPCION: ";
-        cin >> opc;
-        switch (opc)
-        {
-        case 1:
-                system("cls");
-                listadoMascotas();
-                break;
-        case 2:
-                altaFormularioAdopcion();
-                break;
-        case 0:
-                return false;
-                break;
-        }
-        system("pause");
-
-        return false;
-}
-
-bool menuAdopcionesEmpleado()
+void menuAdopcionesEmpleado()
 {
         while (true)
         {
                 int opc;
+                system("cls");
                 cout << "------------MENU ADOPCIONES------------" << endl;
                 cout << "1. DAR DE ALTA MASCOTA" << endl;
                 cout << "2. DAR DE BAJA MASCOTA" << endl;
@@ -374,37 +417,71 @@ bool menuAdopcionesEmpleado()
                 case 1:
                         system("cls");
                         altaMascota();
+                        system("pause");
                         break;
                 case 2:
                         system("cls");
                         bajaMascota();
+                        system("pause");
                         break;
                 case 3:
                         system("cls");
                         listadoMascotas();
+                        system("pause");
                         break;
                 case 4:
                         system("cls");
                         modificarMascota();
+                        system("pause");
                         break;
                 case 5:
                         system("cls");
                         listadoFormulariosAdopcion();
+                        system("pause");
                         break;
                 case 6:
                         system("cls");
                         aprobarRechazarAdopcion();
+                        system("pause");
                         break;
 
                 case 0:
-                        system("pause");
-                        return false;
+                        return;
                         break;
                 }
         }
 }
 
-bool menuEmpleados()
+void menuAdopcionesCliente()
+{
+        int opc;
+        system("cls");
+        cout << "------------MENU ADOPCIONES------------" << endl;
+        cout << "1. VER LISTADO DE MASCOTAS DISPONIBLES" << endl;
+        cout << "2. FORMULARIO DE ADOPCION" << endl;
+        cout << "0. MENU PRINCIPAL" << endl
+             << endl;
+        cout << "SELECCIONE UNA OPCION: ";
+        cin >> opc;
+        switch (opc)
+        {
+        case 1:
+                system("cls");
+                listadoMascotas();
+                system("pause");
+                break;
+        case 2:
+                system("cls");
+                altaFormularioAdopcion();
+                system("pause");
+                break;
+        case 0:
+                return;
+                break;
+        }
+}
+
+void menuEmpleados()
 {
         while (true)
         {
@@ -445,19 +522,17 @@ bool menuEmpleados()
                         menuAdopcionesEmpleado();
                         break;
                 case 0:
-                        return false;
+                        return;
                         break;
                 }
         }
 
-        return false;
 }
 
 int main()
 {
         int opc;
-        bool shouldContinue = true;
-        while (true || shouldContinue)
+        while (true)
         {
                 system("cls");
                 cout << "------------MENU PRINCIPAL------------" << endl;
@@ -470,11 +545,11 @@ int main()
                 switch (opc)
                 {
                 case 0:
-                        return 0;
+                        return false;
                         break;
                 case 1:
                         system("cls");
-                        shouldContinue = menuAdopcionesCliente();
+                        menuAdopcionesCliente();
                         break;
                 case 2:
                         char rta = 'S';
@@ -494,9 +569,10 @@ int main()
                         }
 
                         system("cls");
-                        shouldContinue = menuEmpleados();
+                        menuEmpleados();
                         break;
                 }
         }
+
         return 0;
 }

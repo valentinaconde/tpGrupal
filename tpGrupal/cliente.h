@@ -61,20 +61,20 @@ void Cliente::Cargar()
 
 void Cliente::Mostrar()
 {
-
-    cout << "APELLIDO Y NOMBRE: ";
-    cout << getApellido();
-    cout << " ";
-    cout << getNombre() << endl;
-    cout << "DNI: ";
-    cout << getDni() << endl;
-    cout << "DIRECCION: ";
-    cout << getDireccion() << endl;
-    cout << "CONTACTO: ";
-    cout << getContacto() << endl;
-    fechaRegistro.Mostrar();
-    cout << "ESTADO: ";
-    cout << estado << endl;
+    if (estado)
+    {
+        cout << "APELLIDO Y NOMBRE: ";
+        cout << getApellido();
+        cout << " ";
+        cout << getNombre() << endl;
+        cout << "DNI: ";
+        cout << getDni() << endl;
+        cout << "DIRECCION: ";
+        cout << getDireccion() << endl;
+        cout << "CONTACTO: ";
+        cout << getContacto() << endl;
+        fechaRegistro.Mostrar();
+    }
 }
 
 void Cliente::grabarEnDisco(int pos = -1)
@@ -86,7 +86,7 @@ void Cliente::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
     }
@@ -96,7 +96,7 @@ void Cliente::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
         fseek(p, sizeof *this * pos, 0);
@@ -117,12 +117,21 @@ bool Cliente::leerDeDisco(int pos)
     return x;
 }
 
-//////////PROTOTIPOS
-void altaCliente();
-void bajaCliente();
-void listadoClientes();
-int buscarDniCliente(int);
-void grabarRegistro(Cliente);
+int buscarDniCliente(int dni)
+{
+    Cliente reg;
+    int pos = 0;
+
+    while (reg.leerDeDisco(pos))
+    {
+        if (dni == reg.getDni() && reg.getEstado())
+        {
+            return pos;
+        }
+        pos++;
+    }
+    return -1;
+}
 
 void altaCliente()
 {
@@ -139,23 +148,6 @@ void altaCliente()
         cout << "YA EXISTE EL DNI DEL CLIENTE" << endl;
         cout << "NO SE GRABO EL REGISTRO" << endl;
     }
-    system("pause");
-}
-
-int buscarDniCliente(int dni)
-{
-    Cliente reg;
-    int pos = 0;
-
-    while (reg.leerDeDisco(pos))
-    {
-        if (dni == reg.getDni())
-        {
-            return pos;
-        }
-        pos++;
-    }
-    return -1;
 }
 
 void grabarRegistro(Cliente reg)
@@ -165,7 +157,7 @@ void grabarRegistro(Cliente reg)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return;
     }
     fwrite(&reg, sizeof reg, 1, p);
@@ -181,7 +173,7 @@ void bajaCliente()
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -190,7 +182,7 @@ void bajaCliente()
     if (!obj.getEstado())
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -207,7 +199,6 @@ void listadoClientes()
         reg.Mostrar();
         cout << endl;
     }
-    system("pause");
 }
 
 void listadoClientesOrdenadosPorDni()
@@ -242,11 +233,13 @@ void listadoClientesOrdenadosPorDni()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
     delete[] vec;
-    system("pause");
 }
 
 void listadoClientesOrdenadosPorApellido()
@@ -281,11 +274,13 @@ void listadoClientesOrdenadosPorApellido()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
     delete[] vec;
-    system("pause");
 }
 
 void listadoClientesOrdenadosPorFechaRegistro()
@@ -338,12 +333,14 @@ void listadoClientesOrdenadosPorFechaRegistro()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
 
     delete[] vec;
-    system("pause");
 }
 
 void modificarCliente()
@@ -355,7 +352,7 @@ void modificarCliente()
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -364,7 +361,7 @@ void modificarCliente()
     if (!obj.getEstado())
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -398,16 +395,16 @@ void modificarCliente()
         break;
     default:
         cout << "OPCION INCORRECTA" << endl;
-        system("pause");
+
         return;
     }
 
     obj.grabarEnDisco(pos);
     cout << "REGISTRO MODIFICADO" << endl;
-    system("pause");
 }
 
-void buscarClientePorDni(){
+void buscarClientePorDni()
+{
     int dni;
     cout << "INGRESE EL DNI DEL CLIENTE A BUSCAR " << endl;
     cin >> dni;
@@ -415,7 +412,7 @@ void buscarClientePorDni(){
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -424,15 +421,15 @@ void buscarClientePorDni(){
     if (!obj.getEstado())
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
     obj.Mostrar();
-    system("pause");
 }
 
-void buscarClientePorApellido(){
+void buscarClientePorApellido()
+{
     char apellido[30];
     cout << "INGRESE EL APELLIDO DEL CLIENTE A BUSCAR " << endl;
     cargarCadena(apellido, 30);
@@ -440,46 +437,48 @@ void buscarClientePorApellido(){
     int pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
-        if(strcmp(reg.getApellido(), apellido) == 0){
+        if (strcmp(reg.getApellido(), apellido) == 0 && reg.getEstado())
+        {
             reg.Mostrar();
             cout << endl;
         }
     }
-    system("pause");
 }
 
-void listadoClientesConMasDe5Compras(){
+void listadoClientesConMasDe5Compras()
+{
     Cliente reg;
     int pos = 0;
     while (reg.leerDeDisco(pos++) == true)
     {
-        if(reg.getEstado()){
-            // contar las compras
+        if (reg.getEstado())
+        {
             int cantCompras = 0;
             FILE *p;
             p = fopen("venta.dat", "rb");
             if (p == NULL)
             {
                 cout << "ERROR DE ARCHIVO" << endl;
-                system("pause");
+
                 return;
             }
             Venta aux;
             while (fread(&aux, sizeof aux, 1, p) == 1)
             {
-                if(aux.getDniCliente() == reg.getDni()){
+                if (aux.getDniCliente() == reg.getDni() && reg.getEstado())
+                {
                     cantCompras++;
                 }
             }
             fclose(p);
-            if(cantCompras > 5){
+            if (cantCompras > 5)
+            {
                 reg.Mostrar();
                 cout << "CANTIDAD DE COMPRAS: " << cantCompras << endl;
                 cout << endl;
             }
         }
     }
-    system("pause");
 }
 
 #endif

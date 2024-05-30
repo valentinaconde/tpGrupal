@@ -44,14 +44,14 @@ int calcularTotal(int codigoVenta)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return -1;
     }
     Venta reg;
     float total = 0;
     while (fread(&reg, sizeof reg, 1, p) == 1)
     {
-        if (reg.getCodigoVenta() == codigoVenta)
+        if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
             total += reg.getPrecioTotal();
         }
@@ -94,13 +94,13 @@ void getFechaFactura(int codigoVenta)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return;
     }
     Venta reg;
     while (fread(&reg, sizeof reg, 1, p) == 1)
     {
-        if (reg.getCodigoVenta() == codigoVenta)
+        if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
             cout << "FECHA DE FACTURA: ";
             reg.getFechaTransaccion().Mostrar();
@@ -113,6 +113,7 @@ void getFechaFactura(int codigoVenta)
 
 void Factura::Mostrar()
 {
+    if(estado){
     cout << "NUMERO DE FACTURA: ";
     cout << getNumeroFactura() << endl;
     cout << "CODIGO DE VENTA: ";
@@ -120,8 +121,7 @@ void Factura::Mostrar()
     getFechaFactura(getCodigoVenta());
     cout << "TOTAL: ";
     cout << getTotal() << endl;
-    cout << "ESTADO: ";
-    cout << estado << endl;
+    }
 }
 
 void Factura::grabarEnDisco(int pos = -1)
@@ -133,7 +133,7 @@ void Factura::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
     }
@@ -143,7 +143,7 @@ void Factura::grabarEnDisco(int pos = -1)
         if (p == NULL)
         {
             cout << "ERROR DE ARCHIVO" << endl;
-            system("pause");
+
             return;
         }
         fseek(p, sizeof *this * pos, 0);
@@ -164,13 +164,6 @@ bool Factura::leerDeDisco(int pos)
     return x;
 }
 
-//////////PROTOTIPOS
-void altaFactura();
-void bajaFactura();
-void listadoFacturas();
-int buscarNumeroFactura(int);
-void grabarRegistro(Factura);
-
 bool chequearExistenciaVenta(int codigoVenta)
 {
     FILE *p;
@@ -178,13 +171,13 @@ bool chequearExistenciaVenta(int codigoVenta)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return false;
     }
     Venta reg;
     while (fread(&reg, sizeof reg, 1, p) == 1)
     {
-        if (reg.getCodigoVenta() == codigoVenta)
+        if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
             fclose(p);
             return true;
@@ -200,7 +193,7 @@ int buscarVenta(int num)
     int pos = 0;
     while (reg.leerDeDisco(pos))
     {
-        if (num == reg.getCodigoVenta())
+        if (num == reg.getCodigoVenta() && reg.getEstado())
         {
             return pos;
         }
@@ -232,10 +225,8 @@ void altaFactura()
         cout << "YA EXISTE UNA FACTURA PARA EL CODIGO DE VENTA INGRESADO O LA VENTA NO EXISTE" << endl;
         cout << "NO SE GRABO EL REGISTRO" << endl;
     }
-    system("pause");
 }
 
-// TO DO ver si esto se usa en otro lado
 int buscarNumeroFactura(int num)
 {
     Factura reg;
@@ -243,7 +234,7 @@ int buscarNumeroFactura(int num)
 
     while (reg.leerDeDisco(pos))
     {
-        if (num == reg.getNumeroFactura())
+        if (num == reg.getNumeroFactura() && reg.getEstado())
         {
             return pos;
         }
@@ -259,7 +250,7 @@ void grabarRegistro(Factura reg)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return;
     }
     fwrite(&reg, sizeof reg, 1, p);
@@ -275,7 +266,7 @@ void bajaFactura()
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -284,7 +275,7 @@ void bajaFactura()
     if (!obj.getEstado())
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
@@ -301,7 +292,6 @@ void listadoFacturas()
         reg.Mostrar();
         cout << endl;
     }
-    system("pause");
 }
 
 Venta getVentaPorCodigo(int codigoVenta)
@@ -311,13 +301,13 @@ Venta getVentaPorCodigo(int codigoVenta)
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return Venta();
     }
     Venta reg;
     while (fread(&reg, sizeof reg, 1, p) == 1)
     {
-        if (reg.getCodigoVenta() == codigoVenta)
+        if (reg.getCodigoVenta() == codigoVenta && reg.getEstado())
         {
             fclose(p);
             return reg;
@@ -379,15 +369,18 @@ void listadoFacturasPorFecha()
 
     for (int i = 0; i < cantRegistros; i++)
     {
-        vec[i].Mostrar();
-        cout << endl;
+        if (vec[i].getEstado())
+        {
+            vec[i].Mostrar();
+            cout << endl;
+        }
     }
 
     delete[] vec;
-    system("pause");
 }
 
-void buscarFacturaPorNumero(){
+void buscarFacturaPorNumero()
+{
     int num;
     cout << "INGRESE EL NUMERO DE FACTURA A BUSCAR " << endl;
     cin >> num;
@@ -395,17 +388,17 @@ void buscarFacturaPorNumero(){
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
     Factura obj;
     obj.leerDeDisco(pos);
     obj.Mostrar();
-    system("pause");
 }
 
-void buscarFacturaPorCodigoVenta(){
+void buscarFacturaPorCodigoVenta()
+{
     int num;
     cout << "INGRESE EL CODIGO DE VENTA A BUSCAR " << endl;
     cin >> num;
@@ -413,17 +406,17 @@ void buscarFacturaPorCodigoVenta(){
     if (pos == -1)
     {
         cout << "NO EXISTE EL REGISTRO" << endl;
-        system("pause");
+
         return;
     }
 
     Factura obj;
     obj.leerDeDisco(pos);
     obj.Mostrar();
-    system("pause");
 }
 
-void informeTotalFacturadoPorAnio(){
+void informeTotalFacturadoPorAnio()
+{
     int anio;
     cout << "INGRESE EL ANIO A BUSCAR " << endl;
     cin >> anio;
@@ -433,28 +426,28 @@ void informeTotalFacturadoPorAnio(){
     while (reg.leerDeDisco(pos++) == true)
     {
         Venta aux = getVentaPorCodigo(reg.getCodigoVenta());
-        if (aux.getFechaTransaccion().getAnio() == anio)
+        if (aux.getFechaTransaccion().getAnio() == anio && aux.getEstado())
         {
             total += reg.getTotal();
         }
     }
     cout << "TOTAL FACTURADO EN EL ANIO " << anio << ": " << total << endl;
-    system("pause");
 }
 
-Cliente buscarCliente(int dni){
+Cliente buscarCliente(int dni)
+{
     FILE *p;
     p = fopen("cliente.dat", "rb");
     Cliente reg;
     if (p == NULL)
     {
         cout << "ERROR DE ARCHIVO" << endl;
-        system("pause");
+
         return Cliente();
     }
     while (fread(&reg, sizeof reg, 1, p) == 1)
     {
-        if (reg.getDni() == dni)
+        if (reg.getDni() == dni && reg.getEstado())
         {
             fclose(p);
             return reg;
@@ -462,10 +455,10 @@ Cliente buscarCliente(int dni){
     }
     fclose(p);
     return Cliente();
-
 }
 
-void informeTotalFacturadoPorCliente(){
+void informeTotalFacturadoPorCliente()
+{
     int dniCliente;
     cout << "INGRESE EL DNI DE CLIENTE A BUSCAR " << endl;
     cin >> dniCliente;
@@ -475,14 +468,13 @@ void informeTotalFacturadoPorCliente(){
     while (reg.leerDeDisco(pos++) == true)
     {
         Venta aux = getVentaPorCodigo(reg.getCodigoVenta());
-        if (aux.getDniCliente() == dniCliente)
+        if (aux.getDniCliente() == dniCliente && aux.getEstado())
         {
             total += reg.getTotal();
         }
     }
     Cliente cliente = buscarCliente(dniCliente);
     cout << "TOTAL FACTURADO AL CLIENTE " << cliente.getNombre() << " " << cliente.getApellido() << ": " << total << endl;
-    system("pause");
 }
 
 #endif
