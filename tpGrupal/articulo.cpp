@@ -1,179 +1,103 @@
-/*# include<iostream>
-# include<cstdlib>
-# include<cstring>
+#include <iostream>
+#include <cstring>
+#include "Articulo.h"
 
-using namespace std;
+Articulo::Articulo(){
+    _codigo=0;
+    strcpy(_descripcion,"S/N");
+    _precio=0;
+    _stock=0;
+    _categoria=0;
+    _estado=true;
+}
 
-#include "articulo.h"
-
-void Articulo::Cargar(){
-        cout<<"CODIGO: ";
-        cin>>cod;
-        cout<<"DESCRIPCION: ";
-        cin>>desc;
-        cout<<"PU: ";
-        cin>>pu;
-        cout<<"STOCK: ";
-        cin>>stock;
-        estado=true;
-      }
+Articulo::Articulo(int codigo, const char *descripcion, float precio, int stock, int categoria){
+    setCodigo(codigo);
+    setDescripcion(descripcion);
+    setPrecio(precio);
+    setStock(stock);
+    setCategoria(categoria);
+    setEstado(true);
+}
 
 void Articulo::Mostrar(){
-  if(estado==true){
-      cout<<"CODIGO: ";
-      cout<<getCod()<<endl;
-      cout<<"DESCRIPCION: ";
-      cout<<desc<<endl;
-      cout<<"PU: ";
-      cout<<pu<<endl;
-      cout<<"STOCK: ";
-      cout<<stock<<endl;
+    if(_estado){
+    std::cout << "CODIGO: ";
+    std::cout << _codigo << std::endl;
+    std::cout << "DESCRIPCION: ";
+    std::cout << _descripcion << std::endl;
+    std::cout << "PRECIO: ";
+    std::cout << _precio << std::endl;
+    std::cout << "STOCK: ";
+    std::cout << _stock << std::endl;
+    std::cout << "CATEGORIA: ";
+    std::cout << _categoria << std::endl;
+    if(_estado){
+        std::cout << "ESTADO: Disponible" <<std::endl;
     }
-  }
-
-void Articulo::grabarEnDisco(int pos=0){
-  FILE *p;
-  if(pos==0){
-    p=fopen("producto.dat","ab");
-    if(p==NULL){
-      cout<<"ERROR DE ARCHIVO"<<endl;
-      system("pause");
-      return;
-      }
+    else{
+        std::cout << "ESTADO: Eliminado" <<std::endl;
     }
-  else{
-    p=fopen("producto.dat","rb+");
-      if(p==NULL){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        system("pause");
-        return;
-      }
-    fseek(p, sizeof *this*pos, 0);
+    std::cout << "--------------------------"<<std::endl;
     }
-  fwrite(this, sizeof *this, 1, p);
-  fclose(p);
 }
 
-
-///this: puntero oculto que contiene la direcci�n del objeto que llama
-///al m�todo
-
-
-bool Articulo::leerDeDisco(int pos){
-  FILE *p;
-  p=fopen("producto.dat","rb");
-  if(p==NULL) return false;
-  fseek(p, sizeof(Articulo)*pos, 0);
-  bool x=fread(this, sizeof *this,1, p);
-  fclose(p);
-  return x;
+int Articulo::getCodigo(){
+    return _codigo;
 }
 
-//////////PROTOTIPOS
-void altaArticulo();
-void bajaArticulo();
-void listadoArticulos();
-int buscarCodigoArticulo(char *);
-void grabarRegistro(Articulo);
-/*
-int main(){
-  Articulo a;
-  int opc;
-  while(true){
-    system("cls");
-    cout<<"------------MENU ARTICULOS------------"<<endl;
-    cout<<"1. ALTA ARTICULOS"<<endl;
-    cout<<"2. BAJA ARTICULOS"<<endl;
-    cout<<"3. LISTADO"<<endl;
-    cout<<"4. SALIR"<<endl;
-    cout<<"SELECCIONE UNA OPCION: "<<endl;
-    cin>>opc;
-    switch(opc){
-      case 1: system("cls");
-              altaArticulo();
-              break;
-      case 2: bajaArticulo();
-              break;
-      case 3: system("cls");
-              listadoArticulos();
-              break;
-      case 4: return 0;
-              break;
-
-
-      }
-    system("pause");
-  }
-  return 0;
+const char* Articulo::getDescripcion(){
+    return _descripcion;
 }
 
-/////////////////////////////
-
-void altaArticulo(){
-  Articulo obj;
-  obj.Cargar();
-  int pos=buscarCodigoArticulo(obj.getCod());
-  if(pos==-1){
-    obj.grabarEnDisco();
-    cout<<"REGISTRO AGREGADO"<<endl;
-    }
-  else{
-    cout<<"YA EXISTE EL CODIGO DE ARTICULOS"<<endl;
-    cout<<"NO SE GRABO EL REGISTRO"<<endl;
-    }
-  system("pause");
-  }
-
-int buscarCodigoArticulo(char *cod){
-  Articulo reg;
-  int pos=0;
-  while(reg.leerDeDisco(pos)){
-    if(strcmp(cod, reg.getCod())==0){
-       return pos;
-      }
-    pos++;
-    }
- return -1 ;
-  }
-
-
-void grabarRegistro(Articulo reg){
-  FILE *p;
-  p=fopen("producto.dat","ab");
-  if(p==NULL){
-    cout<<"ERROR DE ARCHIVO"<<endl;
-    system("pause");
-    return;
-  }
-  fwrite(&reg, sizeof reg, 1, p);
-  fclose(p);
+float Articulo::getPrecio(){
+    return _precio;
 }
 
-void bajaArticulo(){
-    char *cod;
-    cout<<"INGRESE EL CODIGO DEL OBJETO A ELIMINAR "<<endl;
-    cin>>cod;
-    int pos=buscarCodigoArticulo(cod);
-    if(pos==-1){
-      cout<<"NO EXISTE EL REGISTRO"<<endl;
-      system("pause");
-      return;
+int Articulo::getStock(){
+    return _stock;
+}
+
+int Articulo::getCategoria(){
+    return _categoria;
+}
+
+int Articulo::getEstado(){
+    return _estado;
+}
+
+void Articulo::setCodigo(int codigo){
+   _codigo=codigo;
+}
+
+void Articulo::setDescripcion(const char *descripcion){
+    strcpy(_descripcion,descripcion);
+}
+
+void Articulo::setPrecio(float precio){
+    if(precio>0){
+        _precio=precio;
+    }else{
+        _precio=0;
     }
-    Articulo obj;
-    obj.leerDeDisco(pos);
-    obj.setEstado(false);
-    obj.grabarEnDisco(pos);
-  }
+}
 
-void listadoArticulos(){
-  Articulo reg;
-  int pos=0;
-  while(reg.leerDeDisco(pos++)==true){
-    reg.Mostrar();
-    cout<<endl;
+void Articulo::setStock(int stock){
+    if(stock>0){
+        _stock=stock;
+    }else{
+        _stock=0;
     }
- }
+}
 
+void Articulo::setCategoria(int categoria){
+    if(categoria>0){
+        _categoria=categoria;
+    }else{
+        _categoria=0;
+    }
+}
 
-
-*/
+void Articulo::setEstado(bool estado){
+    _estado=estado;
+}

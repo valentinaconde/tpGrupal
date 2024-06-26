@@ -33,3 +33,234 @@
 
 1717101442 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\formularioadopcion.h
 
+1719424723 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\main.cpp
+	<iostream>
+	<cstdlib>
+	<cstring>
+	"Fecha.h"
+	"Articulo.h"
+	"ArticuloArchivo.h"
+	"ArticuloManager.h"
+	"categoria.h"
+	"categoriaArchivo.h"
+	"categoriaManager.h"
+	"Persona.h"
+	"PersonaArchivo.h"
+	"PersonaManager.h"
+	"Cliente.h"
+	"ClienteArchivo.h"
+	"ClienteManager.h"
+	"DetalleCompra.h"
+	"DetalleCompraArchivo.h"
+	"DetalleCompraManager.h"
+	"DetalleFactura.h"
+	"DetalleFacturaArchivo.h"
+	"DetalleFacturaManager.h"
+	"Factura.h"
+	"FacturaArchivo.h"
+	"FacturaManager.h"
+	"Compra.h"
+	"CompraArchivo.h"
+	"CompraManager.h"
+	"Mascota.h"
+	"FormularioAdopcion.h"
+	"FormularioAdopcionArchivo.h"
+	"FormularioAdopcionManager.h"
+	"RegistroAdopcion.h"
+	"RegistroAdopcionArchivo.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\fecha\fecha.h
+	<string>
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\articulo\articulo.h
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\articulo\articuloarchivo.h
+	"Articulo.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\articulo\articulomanager.h
+	"Articulo.h"
+	"ArticuloArchivo.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\detallecompra\detallecompra.h
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\detallecompra\detallecompraarchivo.h
+	"DetalleCompra.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\detallecompra\detallecompramanager.h
+	"DetalleCompra.h"
+	"DetalleCompraArchivo.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\detallefactura\detallefactura.h
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\detallefactura\detallefacturaarchivo.h
+	"DetalleFactura.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\detallefactura\detallefacturamanager.h
+	"DetalleFactura.h"
+	"DetalleFacturaArchivo.h"
+
+1719411237 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\factura\factura.h
+	<string>
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\factura\facturaarchivo.h
+	"Factura.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\factura\facturamanager.h
+	"Factura.h"
+	"FacturaArchivo.h"
+
+1719411249 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\compra\compra.h
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\compra\compraarchivo.h
+	"Compra.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\compra\compramanager.h
+	"Compra.h"
+	"CompraArchivo.h"
+
+1719411743 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\categoria\categoria.h
+	<string>
+
+1719412122 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\categoria\categoriaarchivo.h
+	"Categoria.h"
+
+1719412479 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\categoria\categoriamanager.h
+	"CategoriaArchivo.h"
+
+1719413812 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\mascota\mascota.h
+
+1719413202 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\persona\persona.h
+	<string>
+
+1719416502 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\persona\personaarchivo.h
+	"Persona.h"
+
+1719416076 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\persona\personamanager.h
+	"Persona.h"
+	"PersonaArchivo.h"
+
+1719416904 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\cliente\cliente.h
+	<string>
+
+1719415743 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\cliente\clientearchivo.h
+	"Cliente.h"
+
+1719415785 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\cliente\clientemanager.h
+	"Cliente.h"
+	"ClienteArchivo.h"
+
+1719416803 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\formularioadopcion\formularioadopcion.h
+
+1719414802 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\formularioadopcion\formularioadopcionarchivo.h
+	"FormularioAdopcion.h"
+
+1719414841 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\formularioadopcion\formularioadopcionmanager.h
+	"FormularioAdopcion.h"
+	"FormularioAdopcionArchivo.h"
+
+1719416812 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\registroadopcion\registroadopcion.h
+
+1719415374 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\registroadopcion\registroadopcionarchivo.h
+	"RegistroAdopcion.h"
+
+1719421887 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriaarchivo.cpp
+	"CategoriaArchivo.h"
+
+1719411743 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoria.h
+	<string>
+
+1719424849 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriamanager.cpp
+	<iostream>
+	"CategoriaManager.h"
+
+1719421647 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriamanager.h
+	"CategoriaArchivo.h"
+
+1719412122 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriaarchivo.h
+	"Categoria.h"
+
+1719420838 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoria.cpp
+	<iostream>
+	<cstring>
+	"Categoria.h"
+
+1719410781 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\articulo.cpp
+	<iostream>
+	<cstring>
+	"Articulo.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\articulo.h
+
+1719410781 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\articuloarchivo.cpp
+	"ArticuloArchivo.h"
+	<iostream>
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\articuloarchivo.h
+	"Articulo.h"
+
+1719421233 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\articulomanager.cpp
+	<iostream>
+	"ArticuloManager.h"
+
+1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\articulomanager.h
+	"Articulo.h"
+	"ArticuloArchivo.h"
+
+1719422882 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\fecha.cpp
+	<ctime>
+	<iostream>
+	<cstdlib>
+	"Fecha.h"
+
+1719422873 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\fecha.h
+	<string>
+
+1719423730 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\persona.h
+	<string>
+
+1719423169 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personaarchivo.h
+	"Persona.h"
+
+1719416076 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personamanager.h
+	"Persona.h"
+	"PersonaArchivo.h"
+
+1719422191 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\cliente.h
+	<string>
+	"Persona.h"
+	"Fecha.h"
+
+1719415743 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientearchivo.h
+	"Cliente.h"
+
+1719422351 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientemanager.h
+	"Cliente.h"
+	"ClienteArchivo.h"
+
+1719424549 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\cliente.cpp
+	"Cliente.h"
+	<iostream>
+	<cstring>
+
+1719422240 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientearchivo.cpp
+	<iostream>
+	"ClienteArchivo.h"
+
+1719422643 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientemanager.cpp
+	<iostream>
+	"ClienteManager.h"
+
+1719424681 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\persona.cpp
+	<iostream>
+	<cstring>
+	"Persona.h"
+
+1719423214 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personaarchivo.cpp
+	<iostream>
+	<cstring>
+	"PersonaArchivo.h"
+
+1719424592 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personamanager.cpp
+	<iostream>
+	"PersonaManager.h"
+

@@ -1,93 +1,44 @@
-#ifndef FECHA_H
-#define FECHA_H
+#pragma once
+#include <string>
+
 
 class Fecha
 {
-private:
-    int dia, mes, anio;
+    private:
+        int _dia,_mes,_anio;
 
-public:
-    void Cargar();
-    void Mostrar();
-    int getDia() { return dia; }
-    int getMes() { return mes; }
-    int getAnio() { return anio; }
 
-    void setDia(int d) { dia = d; }
-    void setMes(int m) { mes = m; }
-    void setAnio(int a) { anio = a; }
+
+
+    public:
+        void AgregarDia();
+        void RestarDia();
+        //Constructores
+        Fecha(int dia,int mes,int anio);
+        Fecha();
+
+        bool esbisiesto(int anio);
+
+        void AgregarDias(int cantidad);
+
+        void validarDia(int, int);
+        void validarMes(int);
+        void validarAnio(int);
+        void cargarFecha();
+
+        //Getters
+        int getDia();
+        int getMes();
+        int getAnio();
+
+        //setters
+        void setDia(int dia);
+        void setMes(int mes);
+        void setAnio(int anio);
+
+
+
+        //tostring
+        std::string toString();
+
 };
-
-void validarDia(int &dia, int mes)
-{
-
-    bool isValid = false;
-    while (!isValid)
-    {
-        if ((dia < 1 || dia > 31) || (mes == 2 && dia > 29) || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30))
-        {
-            cout << "DIA INVALIDO, INGRESE NUEVAMENTE: ";
-            cin >> dia;
-        }
-        else
-        {
-            isValid = true;
-        }
-    }
-}
-
-void validarMes(int &mes)
-{
-    bool isValid = false;
-    while (!isValid)
-    {
-        if (mes >= 1 && mes <= 12)
-        {
-            isValid = true;
-        }
-        else
-        {
-            cout << "MES INVALIDO, INGRESE NUEVAMENTE: ";
-            cin >> mes;
-        }
-    }
-}
-
-void validarAnio(int &anio)
-{
-    bool isValid = false;
-    while (!isValid)
-    {
-        if (anio >= 1900 && anio <= 2024)
-        {
-            isValid = true;
-        }
-        else
-        {
-            cout << "ANIO INVALIDO, INGRESE NUEVAMENTE: ";
-            cin >> anio;
-        }
-    }
-}
-
-void Fecha::Cargar()
-{
-    cout << "ANIO: ";
-    cin >> anio;
-    validarAnio(anio);
-    cout << "MES: ";
-    cin >> mes;
-    validarMes(mes);
-    cout << "DIA: ";
-    cin >> dia;
-    validarDia(dia, mes);
-}
-
-void Fecha::Mostrar()
-{
-    cout << dia << "/";
-    cout << mes << "/";
-    cout << anio << endl;
-}
-
-#endif
