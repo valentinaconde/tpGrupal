@@ -42,7 +42,6 @@ void Categoria::setIdCategoria(int idCategoria){
 
 void Categoria::setNombre(const char n[30]){
     strcpy(_nombre, n);
-    _nombre[sizeof(_nombre) - 1] = '\0'; // Ensure null termination
 }
 
 void Categoria::setEstado(bool estado){

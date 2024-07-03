@@ -33,7 +33,7 @@
 
 1717101442 c:\users\vconde\desktop\modelo\tp grupal\tpgrupal\formularioadopcion.h
 
-1719424723 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\main.cpp
+1720037808 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\main.cpp
 	<iostream>
 	<cstdlib>
 	<cstring>
@@ -50,6 +50,16 @@
 	"Cliente.h"
 	"ClienteArchivo.h"
 	"ClienteManager.h"
+	"Mascota.h"
+	"MascotaArchivo.h"
+	"MascotaManager.h"
+	"FormularioAdopcion.h"
+	"FormularioAdopcionArchivo.h"
+	"FormularioAdopcionManager.h"
+	"RegistroAdopcion.h"
+	"RegistroAdopcionArchivo.h"
+	"RegistroAdopcionManager.h"
+	"backup.h"
 	"DetalleCompra.h"
 	"DetalleCompraArchivo.h"
 	"DetalleCompraManager.h"
@@ -63,11 +73,6 @@
 	"CompraArchivo.h"
 	"CompraManager.h"
 	"Mascota.h"
-	"FormularioAdopcion.h"
-	"FormularioAdopcionArchivo.h"
-	"FormularioAdopcionManager.h"
-	"RegistroAdopcion.h"
-	"RegistroAdopcionArchivo.h"
 
 1719410781 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\fecha\fecha.h
 	<string>
@@ -163,13 +168,13 @@
 1719415374 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clases\registroadopcion\registroadopcionarchivo.h
 	"RegistroAdopcion.h"
 
-1719421887 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriaarchivo.cpp
+1720038507 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriaarchivo.cpp
 	"CategoriaArchivo.h"
 
 1719411743 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoria.h
 	<string>
 
-1719424849 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriamanager.cpp
+1719522310 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriamanager.cpp
 	<iostream>
 	"CategoriaManager.h"
 
@@ -179,7 +184,7 @@
 1719412122 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoriaarchivo.h
 	"Categoria.h"
 
-1719420838 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoria.cpp
+1720038362 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\categoria.cpp
 	<iostream>
 	<cstring>
 	"Categoria.h"
@@ -206,22 +211,22 @@
 	"Articulo.h"
 	"ArticuloArchivo.h"
 
-1719422882 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\fecha.cpp
+1720016455 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\fecha.cpp
 	<ctime>
 	<iostream>
 	<cstdlib>
 	"Fecha.h"
 
-1719422873 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\fecha.h
+1720016470 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\fecha.h
 	<string>
 
 1719423730 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\persona.h
 	<string>
 
-1719423169 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personaarchivo.h
+1719509962 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personaarchivo.h
 	"Persona.h"
 
-1719416076 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personamanager.h
+1720017367 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personamanager.h
 	"Persona.h"
 	"PersonaArchivo.h"
 
@@ -230,37 +235,133 @@
 	"Persona.h"
 	"Fecha.h"
 
-1719415743 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientearchivo.h
+1719943817 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientearchivo.h
 	"Cliente.h"
 
-1719422351 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientemanager.h
+1720038485 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientemanager.h
 	"Cliente.h"
 	"ClienteArchivo.h"
 
-1719424549 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\cliente.cpp
+1720035874 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\cliente.cpp
 	"Cliente.h"
 	<iostream>
 	<cstring>
 
-1719422240 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientearchivo.cpp
+1720015154 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientearchivo.cpp
 	<iostream>
 	"ClienteArchivo.h"
 
-1719422643 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientemanager.cpp
+1720038496 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\clientemanager.cpp
 	<iostream>
+	<cstring>
 	"ClienteManager.h"
 
-1719424681 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\persona.cpp
+1720035902 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\persona.cpp
 	<iostream>
 	<cstring>
 	"Persona.h"
 
-1719423214 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personaarchivo.cpp
+1719939387 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personaarchivo.cpp
 	<iostream>
 	<cstring>
 	"PersonaArchivo.h"
 
-1719424592 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personamanager.cpp
+1720035906 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\personamanager.cpp
 	<iostream>
 	"PersonaManager.h"
+
+1720038518 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\mascotaarchivo.cpp
+	<iostream>
+	<cstdio>
+	"Mascota.h"
+	"mascotaArchivo.h"
+
+1719523773 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\mascota.h
+
+1719931300 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\mascota.cpp
+	"Mascota.h"
+	<cstring>
+
+1719414337 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\mascotaarchivo.h
+	"Mascota.h"
+
+1720017466 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\mascotamanager.h
+	"Mascota.h"
+	"MascotaArchivo.h"
+
+1720035660 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\mascotamanager.cpp
+	<iostream>
+	<cstring>
+	"MascotaManager.h"
+
+1719413501 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\formularioadopcion.cpp
+	"FormularioAdopcion.h"
+
+1719859622 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\formularioadopcion.h
+	"Cliente.h"
+
+1720038651 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\formularioadopcionarchivo.h
+	"FormularioAdopcion.h"
+
+1720021500 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\formularioadopcionmanager.h
+	"FormularioAdopcion.h"
+	"FormularioAdopcionArchivo.h"
+
+1720020724 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\formularioadopcionarchivo.cpp
+	<iostream>
+	<cstdio>
+	"FormularioAdopcion.h"
+	"FormularioAdopcionArchivo.h"
+
+1720016030 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\registroadopcionarchivo.cpp
+	<iostream>
+	<cstdio>
+	"RegistroAdopcion.h"
+	"RegistroAdopcionArchivo.h"
+
+1720035428 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\registroadopcion.h
+	"Fecha.h"
+
+1720035469 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\registroadopcion.cpp
+	"RegistroAdopcion.h"
+
+1720038533 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\registroadopcionarchivo.h
+	"RegistroAdopcion.h"
+
+1720038543 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\registroadopcionmanager.h
+	"RegistroAdopcion.h"
+	"RegistroAdopcionArchivo.h"
+
+1720036216 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\formularioadopcionmanager.cpp
+	<iostream>
+	<cstring>
+	"FormularioAdopcionManager.h"
+	"Cliente.h"
+	"ClienteArchivo.h"
+	"clienteManager.h"
+	"mascota.h"
+	"mascotaArchivo.h"
+	"mascotaManager.h"
+
+1720038564 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\registroadopcionmanager.cpp
+	<iostream>
+	"RegistroAdopcionManager.h"
+	"formularioAdopcionManager.h"
+	"FormularioAdopcion.h"
+	"mascota.h"
+	"mascotaManager.h"
+
+1720038174 source:c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\backup.cpp
+	<iostream>
+	<cstring>
+	"backup.h"
+	"Cliente.h"
+	"Articulo.h"
+	"Categoria.h"
+	"FormularioAdopcion.h"
+	"RegistroAdopcion.h"
+	"Mascota.h"
+	"Persona.h"
+
+1720037913 c:\users\vconde\desktop\facultad\modelo\tp grupal\tpgrupal\backup.h
 

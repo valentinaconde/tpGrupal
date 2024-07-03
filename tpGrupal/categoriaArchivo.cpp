@@ -44,7 +44,7 @@ Categoria CategoriaArchivo::leer(int index) {
     pFile = fopen("categorias.dat", "rb");
 
     if (pFile == nullptr) {
-        return reg; // Return an empty Categoria object
+        return reg; 
     }
 
     fseek(pFile, index * sizeof(Categoria), SEEK_SET);
@@ -81,7 +81,7 @@ int CategoriaArchivo::buscarByID(int id) {
     }
 
     while (fread(&reg, sizeof(Categoria), 1, pFile)) {
-        if (reg.getIdCategoria() == id) {
+        if (reg.getIdCategoria() == id && reg.getEstado()) {
             fclose(pFile);
             return pos;
         }

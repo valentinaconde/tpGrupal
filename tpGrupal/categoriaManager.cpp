@@ -6,10 +6,10 @@ using namespace std;
 
 void CategoriasManager::agregarCategoria(){
     if(_categoriasArchivo.guardar(crearCategoria())){
-        cout << "La categoria fue guardada con éxito!" << endl;
+        cout << "LA CATEGORIA FUE GUARDADA CON EXITO!" << endl;
     }
     else{
-        cout << "No se pudo guardar la categoria!" << endl;
+        cout << "NO SE PUDO GUARDAR LA CATEGORIA!" << endl;
     }
 }
 
@@ -22,7 +22,7 @@ void CategoriasManager::listarCategorias(){
 
     if(categorias == nullptr)
     {
-        cout << "No se pudo pedir memoria... " << endl;
+        cout << "NO SE PUDO PEDIR MEMORIA... " << endl;
         return;
     }
 
@@ -46,7 +46,7 @@ Categoria CategoriasManager::crearCategoria(){
     idCategoria = _categoriasArchivo.getNuevoID();
 
     cout << "ID: " << idCategoria << endl;
-    cout << "Ingrese nombre de la categoria: ";
+    cout << "INGRESE NOMBRE DE LA CATEGORIA: ";
     cin >> nombre;
     estado = true;
 
@@ -57,9 +57,9 @@ void CategoriasManager::volverCargarCategoria(Categoria &registro){
     char nombre[30];
     bool estado;
 
-    cout << "Ingrese nuevo nombre de la categoria: ";
+    cout << "INGRESE NUEVO NOMBRE DE LA CATEGORIA: ";
     cin >> nombre;
-    cout << "Ingrese nuevo estado de la categoria (1-Activo/0-Inactivo): ";
+    cout << "INGRESE NUEVO ESTADO DE LA CATEGORIA (1-Activo/0-Inactivo): ";
     cin >> estado;
 
     registro.setNombre(nombre);
@@ -67,19 +67,19 @@ void CategoriasManager::volverCargarCategoria(Categoria &registro){
 }
 
 void CategoriasManager::mostrarCategoria(Categoria registro){
-    std::cout << "ID CATEGORIA: ";
-    std::cout << registro.getIdCategoria() << std::endl;
-    std::cout << "NOMBRE: ";
-    std::cout << registro.getNombre() << std::endl;
-    std::cout << "ESTADO: ";
-    std::cout << (registro.getEstado() ? "Activo" : "Inactivo") << std::endl;
+    cout << "ID CATEGORIA: ";
+    cout << registro.getIdCategoria() << endl;
+    cout << "NOMBRE: ";
+    cout << registro.getNombre() << endl;
+    cout << "ESTADO: ";
+    cout << (registro.getEstado() ? "Activo" : "Inactivo") << endl;
 }
 
 void CategoriasManager::modificarCategoria(){
     int idCategoria, index;
     Categoria categoria;
 
-    cout << "Ingrese ID de la categoria a modificar: ";
+    cout << "INGRESE ID DE CATEGORIA A MODIFICAR: ";
     cin >> idCategoria;
 
     index = _categoriasArchivo.buscarByID(idCategoria);
@@ -94,22 +94,63 @@ void CategoriasManager::modificarCategoria(){
 
         if(_categoriasArchivo.guardar(index, categoria))
         {
-            cout << "Se modifico con exito!" << endl;
+            cout << "SE MODIFICO CON EXITO!" << endl;
         }
         else
         {
-            cout << "No se pudo modificar la categoria!" << endl;
+            cout << "NO SE PUDO MODIFICAR LA CATEGORIA!" << endl;
         }
     }
     else
     {
-        cout << "No se encuentra la categoria!" << endl;
+        cout << "NO SE ENCUENTRA LA CATEGORIA!" << endl;
     }
 }
 
+
 void CategoriasManager::eliminarCategoria(){
-    //QUEDA PENDIENTE
+    int codigoCategoria, index;
+    Categoria categoria;
+    bool eliminar;
+
+    cout << "Ingrese ID de la categoria a eliminar: ";
+    cin >> codigoCategoria;
+
+    index = _categoriasArchivo.buscarByID(codigoCategoria);
+
+    if(index != -1)
+    {
+        categoria = _categoriasArchivo.leer(index);
+
+        mostrarCategoria(categoria);
+
+        cout << "Esta seguro de que quiere eliminarlo? 1-Si 0-No: ";
+        cin >> eliminar;
+
+        if(eliminar){
+            categoria.setEstado(false);
+
+            if(_categoriasArchivo.guardar(index, categoria))
+            {
+                cout << "Se elimino con exito!" << endl;
+            }
+            else
+            {
+                cout << "No se pudo eliminar la categoria!" << endl;
+            }
+        }
+        else{
+            cout << "La categoria no fue eliminada!" << endl;
+
+        }
+    }
+    else
+    {
+        cout << "No se encuentra esa categoria!" << endl;
+    }
 }
+
+
 
 void CategoriasManager::Menu(){
     int option;

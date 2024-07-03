@@ -22,7 +22,26 @@ using namespace std;
 #include "Cliente.h"
 #include "ClienteArchivo.h"
 #include "ClienteManager.h"
+
+
+#include "Mascota.h"
+#include "MascotaArchivo.h"
+#include "MascotaManager.h"
+
+#include "FormularioAdopcion.h"
+#include "FormularioAdopcionArchivo.h"
+#include "FormularioAdopcionManager.h"
+
+#include "RegistroAdopcion.h"
+#include "RegistroAdopcionArchivo.h"
+#include "RegistroAdopcionManager.h"
+
+#include "backup.h"
+
+
+
 /*
+
 
 #include "DetalleCompra.h"
 #include "DetalleCompraArchivo.h"
@@ -59,63 +78,86 @@ using namespace std;
 // // #include "Clases/proveedor/ProveedorManager.h"
 
 
-#include "FormularioAdopcion.h"
-#include "FormularioAdopcionArchivo.h"
-#include "FormularioAdopcionManager.h"
 
-#include "RegistroAdopcion.h"
-#include "RegistroAdopcionArchivo.h"
-// #include "Clases/registroAdopcion/RegistroAdopcionManager.h"
+
 
 */
+
+
+
 int main()
 {
 
-       CategoriasManager cat;
-       cat.Menu();
-        /*
-        int opc;
+        ArticulosManager articulosManager;
+        CategoriasManager categoriasManager;
+        ClientesManager clientesManager;
+        FormularioAdopcionManager formularioAdopcionManager;
+        MascotasManager mascotasManager;
+        PersonasManager personasManager;
+        RegistroAdopcionManager registroAdopcionManager;
+        Backup backup;
+
         while (true)
         {
                 system("cls");
-                cout << "------------MENU PRINCIPAL------------" << endl;
-                cout << "INGRESE LA OPCION DESEADA: " << endl;
-                cout << "1. ADOPCIONES" << endl;
-                cout << "2. EMPLEADOS" << endl;
-                cout << "0. SALIR" << endl;
+                int opc;
+                cout << "------------MENU EMPLEADOS------------" << endl;
+                cout << "1. ARTICULOS" << endl;
+                cout << "2. CATEGORIAS" << endl;
+                cout << "3. PERSONAS" << endl;
+                cout << "4. CLIENTES" << endl;
+                cout << "5. PROVEEDORES" << endl;
+                cout << "6. METODOS DE PAGO" << endl;
+                cout << "7. DETALLES DE FACTURAS" << endl;
+                cout << "8. DETALLES DE COMPRA" << endl;
+                cout << "9. FORMULARIOS DE ADOPCION" << endl;
+                cout << "10. REGISTRO DE ADOPCIONES" << endl;
+                cout << "11. MASCOTAS" << endl;
+                cout << "12. BACKUP" << endl;
+                cout << "0. SALIR" << endl
+                     << endl;
+                cout << "SELECCIONE UNA OPCION: ";
                 cin >> opc;
-
                 switch (opc)
                 {
-                case 0:
-                        return false;
-                        break;
                 case 1:
                         system("cls");
-                        menuAdopcionesCliente();
+                        articulosManager.Menu();
+
                         break;
                 case 2:
-                        char rta = 'S';
-                        int contra = 0;
-                        while ((rta == 'S' || rta == 's') && contra != 1)
-                        {
-                                contra = chequearContrasenia();
-                                if (contra == 0)
-                                {
-                                        cout << "QUIERE PROBAR DEVUELTA? : (S/N)" << endl;
-                                        cin >> rta;
-                                        if (rta != 'S' && rta != 's')
-                                                return 0;
-                                        else
-                                                system("cls");
-                                }
-                        }
-
                         system("cls");
-                        menuEmpleados();
+                        categoriasManager.Menu();
+                        break;
+                case 3:
+                        system("cls");
+                        personasManager.Menu();
+                        break;
+                case 4:
+                        system("cls");
+                        clientesManager.Menu();
+                        break;
+                case 9:
+                        system("cls");
+                        formularioAdopcionManager.Menu();
+                        break;
+                case 10:
+                        system("cls");
+                        registroAdopcionManager.Menu();
+                        break;
+                case 11:
+                    system("cls");
+                    mascotasManager.Menu();
+                    break;
+                case 12:
+                    system("cls");
+                    backup.Menu();
+                    break;
+                case 0:
+                        return 0;
                         break;
                 }
         }
-*/
+
         return 0;
 }

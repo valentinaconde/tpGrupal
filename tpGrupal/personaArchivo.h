@@ -11,5 +11,4 @@ public:
     void leerTodos(Persona registros[], int cantidad);
     int buscarPorDni(int dni);
     int getCantidadRegistros();
-    int getNuevoID(); // Asumiendo que las personas también tienen un ID único
 };

@@ -48,7 +48,6 @@ bool Fecha::esbisiesto(int anio){
     }
 }
 
-//Getters
 int Fecha::getDia(){
     return _dia;
 }
@@ -61,7 +60,6 @@ int Fecha::getAnio(){
     return _anio;
 }
 
-//Setters
 void Fecha::setDia(int dia){
     _dia=dia;
 }
@@ -127,17 +125,17 @@ void Fecha::AgregarDias(int cantidad){
 
 }
 
-std::string Fecha::toString(){
-    std::string fechaFormato = "";
-    std::string DD = std::to_string(_dia);
-    std::string MM = std::to_string(_mes);
-    std::string YYYY = std::to_string(_anio);
+string Fecha::toString(){
+    string fechaFormato = "";
+    string DD = to_string(_dia);
+    string MM = to_string(_mes);
+    string YYYY = to_string(_anio);
 
     if(_dia<10){
-        DD = "0" + std::to_string(_dia);
+        DD = "0" + to_string(_dia);
     }
     if(_mes<10){
-        MM = "0" + std::to_string(_mes);
+        MM = "0" + to_string(_mes);
     }
 
     fechaFormato = DD + "/" + MM + "/" + YYYY;
@@ -145,13 +143,13 @@ std::string Fecha::toString(){
     return fechaFormato;
 }
 
-void Fecha::validarDia(int dia, int mes)
+void Fecha::validarDia(int dia, int mes, int anio)
 {
 
     bool isValid = false;
     while (!isValid)
     {
-        if ((dia < 1 || dia > 31) || (mes == 2 && dia > 29) || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30))
+        if ((dia < 1 || dia > 31) || (mes == 2 && esbisiesto(anio) && dia > 29) || (mes == 2 && !esbisiesto(anio) && dia > 28) || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30))
         {
             cout << "DIA INVALIDO, INGRESE NUEVAMENTE: ";
             cin >> dia;
@@ -208,5 +206,10 @@ void Fecha::cargarFecha()
     validarMes(_mes);
     cout << "DIA: ";
     cin >> _dia;
-    validarDia(_dia, _mes);
+    validarDia(_dia, _mes, _anio);
+}
+
+
+void Fecha::mostrarFecha(){
+    cout << _dia << "/" << _mes << "/" << _anio << endl;
 }

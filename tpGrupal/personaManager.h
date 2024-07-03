@@ -5,12 +5,13 @@
 class PersonasManager {
     private:
         void agregarPersona();
+        void eliminarPersona();
+        void modificarPersona();
         void listarPersonas();
         Persona crearPersona();
         void volverCargarPersona(Persona &registro);
         void mostrarPersona(Persona registro);
-        void modificarPersona();
-        void eliminarPersona();
+
         PersonaArchivo _personasarchivo;
     public:
         void Menu();

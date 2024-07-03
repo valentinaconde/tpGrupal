@@ -32,9 +32,53 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="articulo.cpp" />
-		<Unit filename="articulo.h" />
+		<Unit filename="Articulo.cpp" />
+		<Unit filename="Articulo.h" />
+		<Unit filename="ArticuloArchivo.cpp" />
+		<Unit filename="ArticuloArchivo.h" />
+		<Unit filename="ArticuloManager.cpp" />
+		<Unit filename="ArticuloManager.h" />
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h" />
+		<Unit filename="FormularioAdopcion.h" />
+		<Unit filename="backup.cpp" />
+		<Unit filename="backup.h" />
+		<Unit filename="categoria.cpp" />
+		<Unit filename="categoria.h" />
+		<Unit filename="categoriaArchivo.cpp" />
+		<Unit filename="categoriaArchivo.h" />
+		<Unit filename="categoriaManager.cpp" />
+		<Unit filename="categoriaManager.h" />
+		<Unit filename="cliente.cpp" />
+		<Unit filename="cliente.h" />
+		<Unit filename="clienteArchivo.cpp" />
+		<Unit filename="clienteArchivo.h" />
+		<Unit filename="clienteManager.cpp" />
+		<Unit filename="clienteManager.h" />
+		<Unit filename="formularioAdopcion.cpp" />
+		<Unit filename="formularioAdopcionArchivo.cpp" />
+		<Unit filename="formularioAdopcionArchivo.h" />
+		<Unit filename="formularioAdopcionManager.cpp" />
+		<Unit filename="formularioAdopcionManager.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="mascota.cpp" />
+		<Unit filename="mascota.h" />
+		<Unit filename="mascotaArchivo.cpp" />
+		<Unit filename="mascotaArchivo.h" />
+		<Unit filename="mascotaManager.cpp" />
+		<Unit filename="mascotaManager.h" />
+		<Unit filename="persona.cpp" />
+		<Unit filename="persona.h" />
+		<Unit filename="personaArchivo.cpp" />
+		<Unit filename="personaArchivo.h" />
+		<Unit filename="personaManager.cpp" />
+		<Unit filename="personaManager.h" />
+		<Unit filename="registroAdopcion.cpp" />
+		<Unit filename="registroAdopcion.h" />
+		<Unit filename="registroAdopcionArchivo.cpp" />
+		<Unit filename="registroAdopcionArchivo.h" />
+		<Unit filename="registroAdopcionManager.cpp" />
+		<Unit filename="registroAdopcionManager.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

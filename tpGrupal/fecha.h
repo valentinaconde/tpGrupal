@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+using namespace std;
+
 
 class Fecha
 {
@@ -13,6 +15,7 @@ class Fecha
     public:
         void AgregarDia();
         void RestarDia();
+        void mostrarFecha();
         //Constructores
         Fecha(int dia,int mes,int anio);
         Fecha();
@@ -21,7 +24,7 @@ class Fecha
 
         void AgregarDias(int cantidad);
 
-        void validarDia(int, int);
+        void validarDia(int, int, int);
         void validarMes(int);
         void validarAnio(int);
         void cargarFecha();
@@ -39,6 +42,8 @@ class Fecha
 
 
         //tostring
-        std::string toString();
+        string toString();
 
 };
+
+

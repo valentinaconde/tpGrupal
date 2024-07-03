@@ -44,7 +44,7 @@ Cliente ClienteArchivo::leer(int index){
     pFile = fopen("clientes.dat", "rb");
 
     if(pFile == nullptr){
-      return reg; // Assuming Cliente has a default constructor
+      return reg;
     }
 
     fseek(pFile, index * sizeof(Cliente), SEEK_SET);
@@ -70,7 +70,7 @@ void ClienteArchivo::leerTodos(Cliente registros[], int cantidad){
     fclose(pFile);
 }
 
-int ClienteArchivo::buscarByID(int id){
+int ClienteArchivo::buscarPorDni(int id){
     Cliente reg;
     int pos = 0;
     FILE *pFile;
@@ -81,7 +81,7 @@ int ClienteArchivo::buscarByID(int id){
     }
 
     while(fread(&reg, sizeof(Cliente), 1, pFile)){
-        if(reg.getDni() == id){ // Assuming Cliente inherits from Persona and has getDNI()
+        if(reg.getDni() == id && reg.getEstado()){
             fclose(pFile);
             return pos;
         }
@@ -115,7 +115,7 @@ int ClienteArchivo::getNuevoID(){
     int cantidad = getCantidadRegistros();
 
     if(cantidad > 0){
-        return leer(cantidad - 1).getDni() + 1; // Assuming Cliente inherits from Persona and has getDNI()
+        return leer(cantidad - 1).getDni() + 1;
     }
     else{
         return 1;

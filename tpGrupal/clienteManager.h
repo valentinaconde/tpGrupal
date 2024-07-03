@@ -13,5 +13,9 @@ public:
     void mostrarCliente(Cliente registro);
     void modificarCliente();
     void eliminarCliente();
+    void listadoClientesOrdenadosPorDni();
+    void volverClienteNoAptoAdopcion(Cliente);
+    void listadoClientesOrdenadosPorApellido();
+    void listadoClientesOrdenadosPorFechaRegistro();
     void Menu();
 };

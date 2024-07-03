@@ -45,7 +45,7 @@ Persona PersonaArchivo::leer(int index){
     pFile = fopen("personas.dat", "rb");
 
     if(pFile == nullptr){
-      return reg; // Return an empty or default-initialized Persona object
+      return reg;
     }
 
     fseek(pFile, index * sizeof(Persona), SEEK_SET);
@@ -82,7 +82,7 @@ int PersonaArchivo::buscarPorDni(int dni){
     }
 
     while(fread(&reg, sizeof(Persona), 1, pFile)){
-        if(reg.getDni() == dni){
+        if(reg.getDni() == dni && reg.getEstado()){
             fclose(pFile);
             return pos;
         }
@@ -112,15 +112,3 @@ int PersonaArchivo::getCantidadRegistros(){
     return tam;
 }
 
-int PersonaArchivo::getNuevoID(){
-  /*  int cantidad = getCantidadRegistros();
-
-    if(cantidad > 0){
-        Persona ultimoRegistro = leer(cantidad - 1);
-        // Assuming Persona has a method getID() to get its ID
-        return ultimoRegistro.getID() + 1;
-    }
-    else{
-        return 1;
-    }
-*/}

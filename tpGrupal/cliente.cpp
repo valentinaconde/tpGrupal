@@ -7,8 +7,17 @@ Cliente::Cliente() {
     _aptoAdopcion = false;
 }
 
-Cliente::Cliente(int dni, const char nombre[30], const char apellido[30], int telefono, const char direccion[30], const char email[30], bool estado, Fecha fechaRegistro, bool aptoAdopcion)
-: Persona(dni, nombre, apellido, telefono, direccion, email, estado), _fechaRegistro(fechaRegistro), _aptoAdopcion(aptoAdopcion) {}
+Cliente::Cliente(int dni, const char nombre[30], const char apellido[30], int telefono, const char direccion[30], const char email[30], bool estado, Fecha fechaRegistro, bool aptoAdopcion){
+    setDni(dni);
+    setNombre(nombre);
+    setApellido(apellido);
+    setTelefono(telefono);
+    setDireccion(direccion);
+    setEmail(email);
+    setEstado(estado);
+    _aptoAdopcion = aptoAdopcion;
+    _fechaRegistro = fechaRegistro;
+}
 
 
 Fecha Cliente::getFechaRegistro() {

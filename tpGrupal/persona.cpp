@@ -2,6 +2,8 @@
 #include <cstring>
 #include "Persona.h"
 
+using namespace std;
+
 Persona::Persona() {
     strcpy(_nombre, "S/N");
     strcpy(_apellido, "S/N");
@@ -9,7 +11,7 @@ Persona::Persona() {
     _telefono = 0;
     strcpy(_direccion, "S/N");
     strcpy(_email, "S/N");
-    _estado = true;
+    _estado = false;
 }
 
 Persona::Persona(int dni, const char *nombre, const char *apellido, int telefono, const char *direccion, const char* email, bool estado) {
@@ -25,18 +27,20 @@ Persona::Persona(int dni, const char *nombre, const char *apellido, int telefono
 
 void Persona::Mostrar() {
     if (_estado) {
-        std::cout << "NOMBRE: ";
-        std::cout << _nombre << std::endl;
-        std::cout << "APELLIDO: ";
-        std::cout << _apellido << std::endl;
-        std::cout << "EDAD: ";
-        std::cout << "DNI: ";
-        std::cout << _dni << std::endl;
-        std::cout << "ESTADO: Activo" << std::endl;
-    } else {
-        std::cout << "ESTADO: Inactivo" << std::endl;
+        cout << "DNI: ";
+        cout << _dni << endl;
+        cout << "NOMBRE: ";
+        cout << _nombre << endl;
+        cout << "APELLIDO: ";
+        cout << _apellido << endl;
+        cout << "TELEFONO: ";
+        cout << _telefono << endl;
+        cout << "DIRECCION: ";
+        cout << _direccion << endl;
+        cout << "EMAIL: ";
+        cout << _email << endl;
+        cout << "--------------------------" << endl;
     }
-    std::cout << "--------------------------" << std::endl;
 }
 
 
